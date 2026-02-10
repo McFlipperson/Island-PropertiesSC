@@ -1,0 +1,16 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "env": {
+    "NEXT_PUBLIC_SANITY_PROJECT_ID": "@NEXT_PUBLIC_SANITY_PROJECT_ID",
+    "NEXT_PUBLIC_SANITY_DATASET": "@NEXT_PUBLIC_SANITY_DATASET",
+    "AWS_REGION": "@AWS_REGION",
+    "SOPHIA_MODEL_ID": "@SOPHIA_MODEL_ID",
+    "SOPHIA_VOICE_ID": "@SOPHIA_VOICE_ID"
+  },
+  "functions": {
+    "app/api/**": {
+      "maxDuration": 30
+    }
+  }
+}
