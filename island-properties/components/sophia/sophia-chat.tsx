@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { MicOff, Pause, Play, Send, Volume2, X } from "lucide-react";
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
@@ -64,7 +65,10 @@ export function SophiaChat() {
         playVoice(greeting);
       }
     }
-  }, [isSophiaOpen, hasGreeted]);
+    // NOTE: playVoice intentionally omitted from deps to prevent infinite greeting loops
+    // The function is stable (wrapped in useCallback) and greeting only triggers once per session
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSophiaOpen, hasGreeted, propertyContext, isVoiceEnabled]);
 
   // Play voice via Polly API
   const playVoice = useCallback(
@@ -204,9 +208,11 @@ export function SophiaChat() {
         <div className="flex items-center justify-between border-b border-brand-emerald/10 bg-brand-emerald px-5 py-4">
           <div className="flex items-center gap-3">
             <div className="relative">
-              <img
+              <Image
                 src="/assets/sophia-avatar.png"
                 alt="Sophia"
+                width={40}
+                height={40}
                 className="h-10 w-10 rounded-full object-cover border-2 border-brand-gold/60"
               />
               {isSophiaSpeaking && (
