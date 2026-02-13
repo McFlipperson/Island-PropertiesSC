@@ -1,0 +1,49 @@
+2026-02-12 04:10:52,772 - WARNING - AWS query failed: 
+An error occurred (AccessDeniedException) when calling the GetCostAndUsage operation: User: arn:aws:sts::422491854978:assumed-role/EC2-SSM-Core/i-011bbc953f47825b4 is not authorized to perform: ce:GetCostAndUsage on resource: arn:aws:ce:us-east-1:422491854978:/GetCostAndUsage because no identity-based policy allows the ce:GetCostAndUsage action
+
+2026-02-12 04:10:52,772 - ERROR - HARD_STOP: [2026-02-12T04:10:52.772442] HARD_STOP: Budget exceeded ($26.00)
+2026-02-12 04:10:52,772 - INFO - Updated: $26.00
+2026-02-12 04:11:36,372 - WARNING - AWS query failed: 
+An error occurred (AccessDeniedException) when calling the GetCostAndUsage operation: User: arn:aws:sts::422491854978:assumed-role/EC2-SSM-Core/i-011bbc953f47825b4 is not authorized to perform: ce:GetCostAndUsage on resource: arn:aws:ce:us-east-1:422491854978:/GetCostAndUsage because no identity-based policy allows the ce:GetCostAndUsage action
+
+2026-02-12 04:11:36,373 - ERROR - HARD_STOP: [2026-02-12T04:11:36.373039] HARD_STOP: Budget exceeded ($26.00)
+2026-02-12 04:11:36,373 - INFO - Updated: $26.00
+2026-02-12 04:11:36,503 - INFO - AWS spend query successful: $19.04
+2026-02-12 04:11:36,503 - WARNING - ALERT: [2026-02-12T04:11:36.503710] Spend at $19.04 (threshold: $19)
+2026-02-12 04:11:36,504 - INFO - Updated: $19.04
+2026-02-12 04:26:42,210 - INFO - AWS spend query successful: $19.04
+2026-02-12 04:26:42,211 - WARNING - ALERT: [2026-02-12T04:26:42.211224] Spend at $19.04 (threshold: $19)
+2026-02-12 04:26:42,211 - INFO - Updated: $19.04
+2026-02-12 04:35:03,107 - INFO - AWS spend query successful: $19.04
+2026-02-12 04:35:03,107 - WARNING - ALERT: [2026-02-12T04:35:03.107968] Spend at $19.04 (threshold: $19)
+2026-02-12 04:35:03,108 - INFO - Updated: $19.04
+2026-02-12 06:35:12,238 - INFO - AWS spend query successful: $19.04
+2026-02-12 06:35:12,238 - WARNING - ALERT: [2026-02-12T06:35:12.238244] Spend at $19.04 (threshold: $19)
+2026-02-12 06:35:12,238 - INFO - Updated: $19.04
+2026-02-12 08:35:13,807 - INFO - AWS spend query successful: $19.04
+2026-02-12 08:35:13,807 - WARNING - ALERT: [2026-02-12T08:35:13.807445] Spend at $19.04 (threshold: $19)
+2026-02-12 08:35:13,807 - INFO - Updated: $19.04
+2026-02-12 10:35:22,218 - INFO - AWS spend query successful: $19.04
+2026-02-12 10:35:22,218 - WARNING - ALERT: [2026-02-12T10:35:22.218301] Spend at $19.04 (threshold: $19)
+2026-02-12 10:35:22,218 - INFO - Updated: $19.04
+2026-02-12 12:35:32,280 - INFO - AWS spend query successful: $19.04
+2026-02-12 12:35:32,280 - WARNING - ALERT: [2026-02-12T12:35:32.280854] Spend at $19.04 (threshold: $19)
+2026-02-12 12:35:32,281 - INFO - Updated: $19.04
+2026-02-12 14:35:33,996 - INFO - AWS spend query successful: $19.04
+2026-02-12 14:35:33,996 - WARNING - ALERT: [2026-02-12T14:35:33.996647] Spend at $19.04 (threshold: $19)
+2026-02-12 14:35:33,996 - INFO - Updated: $19.04
+2026-02-12 16:35:42,322 - INFO - AWS spend query successful: $19.04
+2026-02-12 16:35:42,322 - WARNING - ALERT: [2026-02-12T16:35:42.322814] Spend at $19.04 (threshold: $19)
+2026-02-12 16:35:42,323 - INFO - Updated: $19.04
+2026-02-12 18:35:43,702 - INFO - AWS spend query successful: $19.04
+2026-02-12 18:35:43,703 - WARNING - ALERT: [2026-02-12T18:35:43.703062] Spend at $19.04 (threshold: $19)
+2026-02-12 18:35:43,703 - INFO - Updated: $19.04
+2026-02-12 20:35:52,257 - INFO - AWS spend query successful: $19.04
+2026-02-12 20:35:52,257 - WARNING - ALERT: [2026-02-12T20:35:52.257486] Spend at $19.04 (threshold: $19)
+2026-02-12 20:35:52,257 - INFO - Updated: $19.04
+2026-02-12 22:36:02,307 - INFO - AWS spend query successful: $19.04
+2026-02-12 22:36:02,307 - WARNING - ALERT: [2026-02-12T22:36:02.307661] Spend at $19.04 (threshold: $19)
+2026-02-12 22:36:02,307 - INFO - Updated: $19.04
+2026-02-13 00:36:11,624 - INFO - AWS spend query successful: $19.04
+2026-02-13 00:36:11,625 - WARNING - ALERT: [2026-02-13T00:36:11.625067] Spend at $19.04 (threshold: $19)
+2026-02-13 00:36:11,625 - INFO - Updated: $19.04

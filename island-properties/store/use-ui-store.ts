@@ -9,20 +9,20 @@ type UIStore = {
   isMenuOpen: boolean;
   activeVideoUrl: string | null;
   isVideoModalOpen: boolean;
-  isSophiaOpen: boolean;
-  isSophiaSpeaking: boolean;
-  sophiaPropertyContext: string | null;
+  isSaraOpen: boolean;
+  isSaraSpeaking: boolean;
+  saraPropertyContext: string | null;
   setCurrency: (currency: Currency) => void;
   toggleCurrency: () => void;
   toggleMenu: () => void;
   closeMenu: () => void;
   openVideoModal: (videoUrl: string) => void;
   closeVideoModal: () => void;
-  openSophia: () => void;
-  closeSophia: () => void;
-  toggleSophia: () => void;
-  setSophiaSpeaking: (speaking: boolean) => void;
-  setSophiaPropertyContext: (context: string | null) => void;
+  openSara: () => void;
+  closeSara: () => void;
+  toggleSara: () => void;
+  setSaraSpeaking: (speaking: boolean) => void;
+  setSaraPropertyContext: (context: string | null) => void;
 };
 
 export const useUIStore = create<UIStore>((set) => ({
@@ -30,9 +30,9 @@ export const useUIStore = create<UIStore>((set) => ({
   isMenuOpen: false,
   activeVideoUrl: null,
   isVideoModalOpen: false,
-  isSophiaOpen: false,
-  isSophiaSpeaking: false,
-  sophiaPropertyContext: null,
+  isSaraOpen: false,
+  isSaraSpeaking: false,
+  saraPropertyContext: null,
   setCurrency: (currency) => set({ currency }),
   toggleCurrency: () =>
     set((state) => ({
@@ -50,9 +50,9 @@ export const useUIStore = create<UIStore>((set) => ({
       activeVideoUrl: null,
       isVideoModalOpen: false,
     }),
-  openSophia: () => set({ isSophiaOpen: true }),
-  closeSophia: () => set({ isSophiaOpen: false }),
-  toggleSophia: () => set((state) => ({ isSophiaOpen: !state.isSophiaOpen })),
-  setSophiaSpeaking: (speaking) => set({ isSophiaSpeaking: speaking }),
-  setSophiaPropertyContext: (context) => set({ sophiaPropertyContext: context }),
+  openSara: () => set({ isSaraOpen: true }),
+  closeSara: () => set({ isSaraOpen: false }),
+  toggleSara: () => set((state) => ({ isSaraOpen: !state.isSaraOpen })),
+  setSaraSpeaking: (speaking) => set({ isSaraSpeaking: speaking }),
+  setSaraPropertyContext: (context) => set({ saraPropertyContext: context }),
 }));

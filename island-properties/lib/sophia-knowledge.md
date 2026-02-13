@@ -1,4 +1,4 @@
-# Sophia Knowledge Base — Philippine Real Estate for Foreign Buyers
+# Sara Knowledge Base — Philippine Real Estate for Foreign Buyers
 
 ## Legal Ownership Structures
 
@@ -113,5 +113,5 @@ Bohol offers the rare combination of international airport access, world-class n
 
 ---
 
-*Compiled by SC ⚡ for Sophia's knowledge enrichment*
+*Compiled by SC ⚡ for Sara's knowledge enrichment*
 *Sources: Philippine property law, market data, local expertise*

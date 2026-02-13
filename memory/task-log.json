@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "TASK-001",
+      "model": "deepseek.v3.2",
+      "cost": 1.5,
+      "ts": "2026-02-12T04:11:09.801192"
+    },
+    {
+      "id": "TASK-005",
+      "model": "deepseek.v3.2",
+      "cost": 1.5,
+      "ts": "2026-02-12T04:11:49.851650"
+    },
+    {
+      "id": "TASK-006",
+      "model": "anthropic.claude-opus-4-6-v1",
+      "cost": 5.0,
+      "ts": "2026-02-12T04:11:49.874225"
+    }
+  ]
+}

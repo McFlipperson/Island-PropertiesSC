@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/global/navbar";
-import { SophiaFab } from "@/components/sophia/sophia-fab";
-import { SophiaChat } from "@/components/sophia/sophia-chat";
+import { SaraFab } from "@/components/sara-components/sara-fab";
+import { SaraChat } from "@/components/sara-components/sara-chat";
 
 export default function SiteLayout({
   children,
@@ -11,9 +11,9 @@ export default function SiteLayout({
     <div className="min-h-screen bg-brand-cream">
       <Navbar />
       {children}
-      <SophiaFab />
-      {/* Default SophiaChat without property context — listing pages override via SophiaListingWrapper */}
-      <SophiaChat />
+      <SaraFab />
+      {/* Default SaraChat without property context — listing pages override via SaraListingWrapper */}
+      <SaraChat />
     </div>
   );
 }

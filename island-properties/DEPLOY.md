@@ -12,7 +12,7 @@
 cd island-properties
 git init
 git add .
-git commit -m "Initial commit with Sophia voice AI"
+git commit -m "Initial commit with Sara voice AI"
 git remote add origin https://github.com/YOUR_USERNAME/island-properties.git
 git push -u origin main
 ```
@@ -41,7 +41,7 @@ Create an IAM user with Bedrock + Polly permissions and use those keys.
 - 100GB bandwidth/month
 - Automatic SSL
 - Global CDN
-- Serverless functions for Sophia API
+- Serverless functions for Sara API
 
 ---
 
@@ -113,13 +113,13 @@ sudo certbot --nginx -d your-domain.com
 ## Post-Launch Checklist
 - [ ] Site accessible via domain
 - [ ] SSL certificate active (https)
-- [ ] Sophia chat working (text + voice)
+- [ ] Sara chat working (text + voice)
 - [ ] Mock listings displaying correctly
 - [ ] Contact form sending emails
 - [ ] Meta Pixel installed for ad tracking
 - [ ] Google Analytics installed
 - [ ] Test on mobile (iPhone, Android)
-- [ ] Test Sophia on mobile
+- [ ] Test Sara on mobile
 - [ ] First Facebook ad live
 
 ---

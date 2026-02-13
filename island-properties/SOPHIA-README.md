@@ -1,13 +1,13 @@
-# Sophia Voice AI — Testing & Integration Guide
+# Sara Voice AI — Testing & Integration Guide
 
 ## What's Built
 
-Sophia is a luxury voice AI property consultant integrated into your Island Properties Next.js app.
+Sara is a luxury voice AI property consultant integrated into your Island Properties Next.js app.
 
 ### Components Created
 - `components/sophia/sophia-chat.tsx` — Main chat interface (glassmorphism, Framer Motion animations)
-- `components/sophia/sophia-fab.tsx` — Floating "Talk to Sophia" button (bottom-right)
-- `components/sophia/sophia-listing-wrapper.tsx` — Passes property data to Sophia on listing pages
+- `components/sophia/sophia-fab.tsx` — Floating "Talk to Sara" button (bottom-right)
+- `components/sophia/sophia-listing-wrapper.tsx` — Passes property data to Sara on listing pages
 - `components/sophia/index.ts` — Barrel export
 
 ### API Routes
@@ -15,9 +15,9 @@ Sophia is a luxury voice AI property consultant integrated into your Island Prop
 - `app/api/sophia/voice/route.ts` — Text-to-speech via AWS Polly (Danielle voice)
 
 ### Modified Files
-- `store/use-ui-store.ts` — Added Sophia state (open/close, speaking, property context)
-- `app/(site)/layout.tsx` — Replaced WhatsApp FAB with Sophia FAB + Chat
-- `app/(site)/listings/[slug]/page.tsx` — Passes property context to Sophia
+- `store/use-ui-store.ts` — Added Sara state (open/close, speaking, property context)
+- `app/(site)/layout.tsx` — Replaced WhatsApp FAB with Sara FAB + Chat
+- `app/(site)/listings/[slug]/page.tsx` — Passes property context to Sara
 
 ### New Dependencies
 - `@aws-sdk/client-bedrock-runtime` — Bedrock API
@@ -62,14 +62,14 @@ cd island-properties
 npm run dev
 ```
 
-### 4. Test Sophia
+### 4. Test Sara
 1. Open `http://localhost:3000`
-2. Click "Talk to Sophia" button (bottom-right)
+2. Click "Talk to Sara" button (bottom-right)
 3. She should greet you with voice
 4. Type a question about properties
 5. She responds with text + voice
 
-On a listing page, Sophia automatically knows about that specific property.
+On a listing page, Sara automatically knows about that specific property.
 
 ---
 
@@ -99,10 +99,10 @@ On a listing page, Sophia automatically knows about that specific property.
 ## Architecture
 
 ```
-User clicks "Talk to Sophia"
-  → SophiaFab toggles isSophiaOpen in Zustand
-  → SophiaChat renders with greeting
-  → On listing pages, SophiaListingWrapper sets property context in store
+User clicks "Talk to Sara"
+  → SaraFab toggles isSaraOpen in Zustand
+  → SaraChat renders with greeting
+  → On listing pages, SaraListingWrapper sets property context in store
   → User types message
   → POST /api/sophia/chat (Bedrock DeepSeek V3.2)
   → Response displayed + POST /api/sophia/voice (AWS Polly)
@@ -113,14 +113,14 @@ User clicks "Talk to Sophia"
 
 ## Customization
 
-### Change Sophia's Voice
+### Change Sara's Voice
 Edit `SOPHIA_VOICE_ID` in `.env.local`:
 - `Danielle` — Sophisticated, clear (default)
 - `Joanna` — Professional, warm
 - `Salli` — Friendly, approachable
 - `Ruth` — Authoritative, mature
 
-### Change Sophia's LLM
+### Change Sara's LLM
 Edit `SOPHIA_MODEL_ID` in `.env.local`:
 - `deepseek.v3.2` — Cheapest, good quality (default)
 - `anthropic.claude-sonnet-4-20250514-v1:0` — Better quality, 20x more expensive
@@ -133,8 +133,8 @@ Edit the system prompt in `app/api/sophia/chat/route.ts` → `buildSystemPrompt(
 
 ## Next Steps (Future Enhancements)
 - [ ] ElevenLabs voice upgrade (premium Filipino accent) when budget allows
-- [ ] Speech-to-text input (let visitors talk to Sophia)
+- [ ] Speech-to-text input (let visitors talk to Sara)
 - [ ] Lead capture integration (save conversations to CRM)
 - [ ] Analytics dashboard (track conversation topics, conversion rates)
 - [ ] Multi-language support (Tagalog, Bisaya)
-- [ ] Sophia avatar/image for the chat header
+- [ ] Sara avatar/image for the chat header

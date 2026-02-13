@@ -4,7 +4,7 @@ import { PrivacyList } from "@/components/listing/privacy-list";
 import { ROISnapshot } from "@/components/listing/roi-snapshot";
 import { SpecsGrid } from "@/components/listing/specs-grid";
 import { VideoModal } from "@/components/listing/video-modal";
-import { SophiaListingWrapper } from "@/components/sophia/sophia-listing-wrapper";
+import { SaraListingWrapper } from "@/components/sara-components/sara-listing-wrapper";
 import { getPropertyBySlug } from "@/lib/sanity/properties";
 import { PortableText } from "@portabletext/react";
 import { unstable_noStore as noStore } from "next/cache";
@@ -126,7 +126,7 @@ Investment: Daily Rate $${property.investment.dailyRateUsd} USD, Yield ${propert
       <VideoModal />
 
       {/* Sophia context provider for this listing */}
-      <SophiaListingWrapper propertyContext={propertyContext} />
+      <SaraListingWrapper propertyContext={propertyContext} />
 
       <div className="fixed inset-x-0 bottom-0 z-[60] border-t border-brand-emerald/15 bg-brand-cream/92 p-4 backdrop-blur-md">
         <div className="mx-auto w-full max-w-7xl">

@@ -1,0 +1,36 @@
+{
+  "verifications": {
+    "code_task": {
+      "checks": [
+        "Source code files exist",
+        "No syntax errors (manual check)",
+        "Build passes (if applicable)",
+        "Commit message written"
+      ]
+    },
+    "deployment_task": {
+      "checks": [
+        "Service deployed",
+        "Service responding",
+        "Logs show no errors",
+        "Test passed"
+      ]
+    },
+    "skill_task": {
+      "checks": [
+        "All script files created",
+        "Scripts executable",
+        "Core function tested",
+        "Documentation written"
+      ]
+    },
+    "cron_task": {
+      "checks": [
+        "Cron installed",
+        "Cron fires on schedule",
+        "Heartbeat file updates",
+        "Logs show success"
+      ]
+    }
+  }
+}

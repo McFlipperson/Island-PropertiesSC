@@ -5,7 +5,7 @@
 cd island-properties
 git init
 git add .
-git commit -m "Island Properties with Sophia voice AI"
+git commit -m "Island Properties with Sara voice AI"
 git remote add origin https://github.com/YOUR_USERNAME/island-properties.git
 git branch -M main
 git push -u origin main
@@ -51,11 +51,11 @@ Click "Deploy" → Vercel will build and deploy automatically
 
 Your site will be live at: `https://island-properties-XXXXX.vercel.app`
 
-## Step 5: Test Sophia
+## Step 5: Test Sara
 1. Open your site
-2. Click "Talk to Sophia" button (bottom-right)
+2. Click "Talk to Sara" button (bottom-right)
 3. Ask: "Can I own this property as a foreigner?"
-4. Sophia should respond with voice
+4. Sara should respond with voice
 
 ## Custom Domain (Optional)
 1. In Vercel dashboard: Settings → Domains
@@ -64,4 +64,4 @@ Your site will be live at: `https://island-properties-XXXXX.vercel.app`
 
 ---
 
-**That's it.** Sophia will be live and working. No sandbox issues, AWS will work properly on Vercel's infrastructure.
+**That's it.** Sara will be live and working. No sandbox issues, AWS will work properly on Vercel's infrastructure.
