@@ -47,3 +47,9 @@ An error occurred (AccessDeniedException) when calling the GetCostAndUsage opera
 2026-02-13 00:36:11,624 - INFO - AWS spend query successful: $19.04
 2026-02-13 00:36:11,625 - WARNING - ALERT: [2026-02-13T00:36:11.625067] Spend at $19.04 (threshold: $19)
 2026-02-13 00:36:11,625 - INFO - Updated: $19.04
+2026-02-13 02:36:12,551 - INFO - AWS spend query successful: $19.04
+2026-02-13 02:36:12,551 - WARNING - ALERT: [2026-02-13T02:36:12.551739] Spend at $19.04 (threshold: $19)
+2026-02-13 02:36:12,552 - INFO - Updated: $19.04
+2026-02-13 04:36:22,349 - INFO - AWS spend query successful: $19.04
+2026-02-13 04:36:22,349 - WARNING - ALERT: [2026-02-13T04:36:22.349570] Spend at $19.04 (threshold: $19)
+2026-02-13 04:36:22,349 - INFO - Updated: $19.04
