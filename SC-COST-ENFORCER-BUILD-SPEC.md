@@ -43,7 +43,7 @@ Automated cost tracking + model enforcement for SC (OpenClaw agent).
 {
   "budget_hard_cap": 20,
   "alert_thresholds": [18, 19, 20],
-  "expensive_models": ["anthropic.claude-opus-4-6-v1", "global.anthropic.claude-sonnet-4-5-20250929-v1:0"],
+  "expensive_models": ["anthropic.claude-opus-4-6-v1", "anthropic.claude-sonnet-4-5-20250929-v1:0"],
   "approved_models": ["deepseek.v3.2"],
   "doc_keywords": ["guide", "setup", "deploy", "install", "tutorial", "readme", "documentation", "explain", "how to"],
   "aws_region": "us-east-1",
