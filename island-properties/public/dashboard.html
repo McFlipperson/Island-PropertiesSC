@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova's Project Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+            color: #eee;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #333;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, #ffd00a, #ff8b00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle { color: #999; font-size: 1rem; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .card h2 {
+            font-size: 1.4rem;
+            color: #fff;
+        }
+        .status {
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .status.active { background: #0f7b6c; color: #fff; }
+        .status.on-hold { background: #ff9b0a; color: #000; }
+        .status.planning { background: #3b82f6; color: #fff; }
+        .status.complete { background: #5e7ce2; color: #fff; }
+        .description {
+            color: #aaa;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        .meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .meta-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+        .meta-label { color: #777; }
+        .meta-value { color: #ddd; font-weight: 500; }
+        .timeline {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .timeline h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        .event {
+            padding: 0.75rem;
+            border-left: 3px solid #ffd00a;
+            background: rgba(255, 208, 10, 0.1);
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
+        }
+        .event-date {
+            font-size: 0.85rem;
+            color: #ffd00a;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        .event-title {
+            color: #fff;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Nova's Project Dashboard</h1>
+        <div class="subtitle">Bohol, Philippines • Updated: February 21, 2026</div>
+    </header>
+
+    <div class="grid">
+        <!-- Island Properties -->
+        <a href="island-properties-detail.html" class="card">
+            <div class="card-header">
+                <h2>🏝️ Island Properties SC</h2>
+                <span class="status active">ACTIVE</span>
+            </div>
+            <div class="description">
+                Luxury real estate platform targeting Korean/foreign buyers in Bohol. Partner with Bohol Landscape Real Estate (20% commission split).
+            </div>
+            <div class="meta">
+                <div class="meta-item">
+                    <span class="meta-label">Contract Signing:</span>
+                    <span class="meta-value">Feb 17, 2026</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Next Action:</span>
+                    <span class="meta-value">Finalize Korean copy</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Result:</span>
+                    <span class="meta-value">First million USD</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Velyra -->
+        <a href="velyra-detail.html" class="card">
+            <div class="card-header">
+                <h2>🧞 Velyra (MagicChat)</h2>
+                <span class="status active">ACTIVE</span>
+            </div>
+            <div class="description">
+                SaaS embeddable AI concierge widget with animated avatar, voice, and speech recognition. The competitive edge for Island Properties.
+            </div>
+            <div class="meta">
+                <div class="meta-item">
+                    <span class="meta-label">Status:</span>
+                    <span class="meta-value">Phase 1-3 complete</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Next Action:</span>
+                    <span class="meta-value">Mobile polish + embed script</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Stack:</span>
+                    <span class="meta-value">Next.js + Bedrock + Polly</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- SolBot -->
+        <a href="solbot-detail.html" class="card">
+            <div class="card-header">
+                <h2>🪙 SolBot</h2>
+                <span class="status on-hold">ON HOLD</span>
+            </div>
+            <div class="description">
+                Solana copy trading bot. Shut down due to fake P&L (random exit prices). Audit complete, needs fixes before restart.
+            </div>
+            <div class="meta">
+                <div class="meta-item">
+                    <span class="meta-label">Current Wallets:</span>
+                    <span class="meta-value">2/20 active</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Critical Fixes:</span>
+                    <span class="meta-value">Real exit prices</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Next Step:</span>
+                    <span class="meta-value">Decide if worth fixing</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Dental Clinic -->
+        <div class="card" style="cursor: default; opacity: 0.8;">
+            <div class="card-header">
+                <h2>🦷 Dental Clinic</h2>
+                <span class="status complete">STABLE</span>
+            </div>
+            <div class="description">
+                Co-owned with wife in Carmen. The safety net — covers living expenses. Wife runs it. Zero time investment needed.
+            </div>
+            <div class="meta">
+                <div class="meta-item">
+                    <span class="meta-label">Role:</span>
+                    <span class="meta-value">Base income</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Focus:</span>
+                    <span class="meta-value">Autopilot</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Silver Hustle -->
+        <div class="card" style="cursor: default; opacity: 0.8;">
+            <div class="card-header">
+                <h2>🪙<span style="font-size: 1rem;"> Silver Hustle</span></h2>
+                <span class="status planning">PLANNING</span>
+            </div>
+            <div class="description">
+                Buy junk silver, refine and cast own bars, sell to friends at spot+. Side income play.
+            </div>
+            <div class="meta">
+                <div class="meta-item">
+                    <span class="meta-label">Status:</span>
+                    <span class="meta-value">Concept stage</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lions Club -->
+        <div class="card" style="cursor: default; opacity: 0.8;">
+            <div class="card-header">
+                <h2>🦁 Lions Club</h2>
+                <span class="status active">ACTIVE</span>
+            </div>
+            <div class="description">
+                Community involvement. Networking with local business leaders (including Atty. Libby Casilan - Bohol Landscape partner).
+            </div>
+            <div class="meta">
+                <div class="meta-item">
+                    <span class="meta-label">Next:</span>
+                    <span class="meta-value">School extension product presentation</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Philosophy:</span>
+                    <span class="meta-value">Make friends richer</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline">
+        <h3>📅 Key Dates</h3>
+        <div class="event">
+            <div class="event-date">FEBRUARY 17, 2026</div>
+            <div class="event-title">Bohol Landscape Contract Signing</div>
+        </div>
+        <div class="event">
+            <div class="event-date">SEPTEMBER 26, 2026</div>
+            <div class="event-title">Reminder: Patricia McCullough's Birthday (27th)</div>
+        </div>
+    </div>
+</body>
+</html>
