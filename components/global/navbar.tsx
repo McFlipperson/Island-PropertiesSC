@@ -9,12 +9,14 @@ import type { Currency } from "@/store/use-ui-store";
 import { useUIStore } from "@/store/use-ui-store";
 
 const navItemsEn = [
-  { label: "Home",       href: "/" },
-  { label: "Properties", href: "/listings" },
+  { label: "Home",        href: "/" },
+  { label: "Properties",  href: "/listings" },
+  { label: "Getting Here", href: "/getting-here" },
 ];
 const navItemsKo = [
-  { label: "홈",   href: "/" },
-  { label: "매물", href: "/listings" },
+  { label: "홈",       href: "/" },
+  { label: "매물",     href: "/listings" },
+  { label: "오시는 길", href: "/getting-here" },
 ];
 
 const currencies: Currency[] = ["PHP", "USD", "KRW"];
