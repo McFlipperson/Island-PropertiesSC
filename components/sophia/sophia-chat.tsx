@@ -25,6 +25,8 @@ export function SophiaChat() {
   const [isVoiceEnabled, setIsVoiceEnabled] = useState(true);
   const [sessionId] = useState(() => `sophia-${Date.now()}-${Math.random().toString(36).slice(2)}`);
   const [remainingMessages, setRemainingMessages] = useState(50);
+  const locale    = useUIStore((state) => state.locale);
+
   const [hasGreeted, setHasGreeted] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -46,9 +48,14 @@ export function SophiaChat() {
   // Greeting on first open
   useEffect(() => {
     if (isSophiaOpen && !hasGreeted) {
-      const greeting = propertyContext
-        ? "Welcome — I'm Sophia, your personal property consultant. I see you're exploring one of our exclusive listings. What would you like to know — the investment potential, ownership structures, or lifestyle features?"
-        : "Welcome — I'm Sophia, your personal property consultant for luxury real estate in Bohol. Whether you're exploring investment opportunities or searching for the perfect island retreat, I'm here to guide you. What brings you to Island Properties today?";
+      const isKo = locale === "ko";
+      const greeting = isKo
+        ? propertyContext
+          ? "안녕하십니까, 고객님. 저는 소피아입니다. 선택하신 매물에 관심을 가져 주셔서 감사드립니다. 투자 수익, 소유권 구조, 또는 라이프스타일 관련 궁금하신 점이 있으시면 말씀해 주십시오."
+          : "안녕하십니까, 고객님. 저는 보홀 럭셔리 부동산 전문 컨시어지 소피아입니다. 투자 기회를 찾고 계시거나 최적의 아일랜드 리트리트를 원하신다면, 세심하게 안내해 드리겠습니다. 오늘 Island Properties를 방문해 주신 이유가 있으신지요?"
+        : propertyContext
+          ? "Welcome — I'm Sophia, your personal property consultant. I see you're exploring one of our exclusive listings. What would you like to know — the investment potential, ownership structures, or lifestyle features?"
+          : "Welcome — I'm Sophia, your personal property consultant for luxury real estate in Bohol. Whether you're exploring investment opportunities or searching for the perfect island retreat, I'm here to guide you. What brings you to Island Properties today?";
 
       const greetingMsg: Message = {
         id: `sophia-${Date.now()}`,
@@ -64,7 +71,7 @@ export function SophiaChat() {
         playVoice(greeting);
       }
     }
-  }, [isSophiaOpen, hasGreeted]);
+  }, [isSophiaOpen, hasGreeted, locale]);
 
   // Play voice via Polly API
   const playVoice = useCallback(
