@@ -145,6 +145,10 @@ export function YunaChat() {
       setInput("");
       setIsLoading(true);
 
+      // Add empty Yuna message immediately — will fill as stream arrives
+      const yunaId = `sophia-${Date.now()}`;
+      setMessages((prev) => [...prev, { id: yunaId, role: "sophia", content: "", timestamp: new Date() }]);
+
       try {
         const history = messages.map((m) => ({
           role: m.role === "sophia" ? "assistant" : "user",
@@ -154,41 +158,57 @@ export function YunaChat() {
         const response = await fetch("/api/sophia/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            message: trimmed,
-            history,
-            propertyContext,
-            sessionId,
-          }),
+          body: JSON.stringify({ message: trimmed, history, propertyContext, sessionId }),
         });
 
-        const data = await response.json();
+        // ── Streaming path ───────────────────────────────────
+        if (response.headers.get("content-type")?.includes("text/event-stream")) {
+          const reader  = response.body!.getReader();
+          const decoder = new TextDecoder();
+          let fullText  = "";
 
-        const sophiaMsg: Message = {
-          id: `sophia-${Date.now()}`,
-          role: "sophia",
-          content: data.reply,
-          timestamp: new Date(),
-        };
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
 
-        setMessages((prev) => [...prev, sophiaMsg]);
+            const lines = decoder.decode(value).split("\n");
+            for (const line of lines) {
+              if (!line.startsWith("data: ")) continue;
+              const payload = line.slice(6).trim();
+              if (payload === "[DONE]") break;
+              try {
+                const { delta, error } = JSON.parse(payload) as { delta?: string; error?: boolean };
+                if (error) throw new Error("stream error");
+                if (delta) {
+                  fullText += delta;
+                  setMessages((prev) =>
+                    prev.map((m) => m.id === yunaId ? { ...m, content: fullText } : m)
+                  );
+                }
+              } catch { /* skip malformed chunk */ }
+            }
+          }
 
-        if (data.remainingMessages !== undefined) {
-          setRemainingMessages(data.remainingMessages);
+          if (isVoiceEnabled && fullText) playVoice(fullText);
+
+        // ── Fallback: non-streaming JSON ─────────────────────
+        } else {
+          const data = await response.json() as { reply: string; remainingMessages?: number; rateLimited?: boolean };
+          setMessages((prev) =>
+            prev.map((m) => m.id === yunaId ? { ...m, content: data.reply } : m)
+          );
+          if (data.remainingMessages !== undefined) setRemainingMessages(data.remainingMessages);
+          if (isVoiceEnabled && !data.rateLimited) playVoice(data.reply);
         }
 
-        if (isVoiceEnabled && !data.rateLimited) {
-          playVoice(data.reply);
-        }
       } catch {
-        const errorMsg: Message = {
-          id: `sophia-error-${Date.now()}`,
-          role: "sophia",
-          content:
-            "I appreciate your patience — please try again in a moment, or feel free to use our contact form.",
-          timestamp: new Date(),
-        };
-        setMessages((prev) => [...prev, errorMsg]);
+        setMessages((prev) =>
+          prev.map((m) =>
+            m.id === yunaId
+              ? { ...m, content: "I appreciate your patience — please try again, or use our contact form." }
+              : m
+          )
+        );
       } finally {
         setIsLoading(false);
       }
