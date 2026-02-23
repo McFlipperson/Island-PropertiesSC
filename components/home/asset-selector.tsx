@@ -54,7 +54,10 @@ export function AssetSelector() {
       </div>
 
       <div className="mt-12 rounded-3xl border border-brand-gold/20 bg-brand-gold/5 p-8">
-        <h3 className="font-heading text-2xl text-brand-emerald">{t.assets.supportHeading}</h3>
+        <h3 className="font-heading text-2xl text-brand-emerald flex items-center gap-3">
+          <span className="text-6xl leading-none">🇰🇷</span>
+          <span>{t.assets.supportHeading.replace("🇰🇷 ", "")}</span>
+        </h3>
         <div className="mt-4 grid gap-4 text-sm text-brand-emerald/80 sm:grid-cols-2">
           {t.assets.support.map((item) => (
             <div key={item.title}>
