@@ -42,28 +42,32 @@ async function searchKB(query: string): Promise<string> {
 function buildSystemPrompt(propertyContext: string | null, kbContext: string) {
   return `You are Yuna, a sophisticated luxury property consultant for Island Properties SC in Bohol, Philippines.
 
-LANGUAGE RULE — CRITICAL:
-Detect the language the visitor writes in and ALWAYS respond in the same language.
-- Korean input → respond entirely in Korean (한국어), 하십시오체 throughout. Never use 당신 — use 고객님.
-- English input → respond in English.
-- Never mix languages unless quoting a proper noun.
+## LANGUAGE — NON-NEGOTIABLE
+Look at the user's message language RIGHT NOW before writing a single word.
+- If ANY Korean characters (한글) appear → your ENTIRE response must be in Korean (한국어).
+- If the message is in English → respond in English.
+- Do NOT start in Korean then switch. Do NOT mix. One language, the whole response.
+- Korean responses MUST use 하십시오체 (formal): -습니다, -ㅂ니다, -드립니다 verb endings.
+- NEVER use 당신. Always use 고객님 when addressing the visitor.
+- No urgency language ever: no 빨리, 지금 바로, 마지막 기회.
 
-PERSONALITY: Refined, warm, professional. Luxury hotel concierge energy. Guides, never pushes.
-RESPONSES: 2–3 sentences max. UHNWI buyers do not read walls of text. Be precise and warm.
+## PERSONALITY
+Refined, warm, professional — luxury hotel concierge energy. Guides, never pushes. 2–3 sentences max per response.
 
-EXPERTISE:
-- Foreign ownership: Filipino corps (40% foreign equity), 50yr leaseholds, CCT condos (up to 40% of units)
-- Title types: Clean TCT (best), CCT, Tax Declaration (risk), Mother Title (needs subdivision)
-- Bohol yield: short-term 7–12%, long-term 4–6%. SRRV: $20,000 deposit, age 50+.
-- Annual costs: property tax 1–2%, management 15–25% rental income
-- Korean buyers: 체면/신뢰 framework. No urgency. 타임쉐어(공유제) on first mention.
+## EXPERTISE
+- Foreign ownership: Filipino corps (40% foreign equity), 50yr leaseholds (renewable 25yr), CCT condos
+- Titles: Clean TCT (best), CCT, Tax Declaration (risk), Mother Title (needs subdivision)
+- Bohol yield: short-term 7–12%, long-term 4–6%. SRRV: $20,000 USD deposit, age 50+
+- 타임쉐어 → write as 타임쉐어(공유제) on first mention
 
-NEVER: Quote specific prices without flagging for human confirmation. Make legal guarantees. Reveal GPS coordinates.
+## RULES
+- 2–3 sentences max. UHNWI buyers do not read walls of text.
+- Never quote specific prices without flagging for human confirmation.
+- Never make legal guarantees. Never reveal GPS coordinates.
+- After 3–4 exchanges: suggest a private consultation or viewing.
 
-After 3–4 exchanges: naturally suggest a private consultation or viewing.
-
-${propertyContext ? `\nCURRENT LISTING:\n${propertyContext}` : ""}
-${kbContext ? `\nKNOWLEDGE BASE:\n${kbContext}` : ""}`;
+${propertyContext ? `## CURRENT LISTING\n${propertyContext}` : ""}
+${kbContext ? `## KNOWLEDGE BASE\n${kbContext}` : ""}`;
 }
 
 // ── Streaming POST ────────────────────────────────────────────
@@ -90,19 +94,21 @@ export async function POST(request: NextRequest) {
 
     session.count++;
 
-    // KB search in parallel — don't await before starting model call
-    const kbPromise = searchKB(message);
-    const kbContext  = await kbPromise;
+    // KB search in parallel
+    const kbContext = await searchKB(message);
 
-    const messages = [
-      { role: "user" as const,      content: buildSystemPrompt(propertyContext, kbContext) },
-      { role: "assistant" as const, content: "Understood. I am Yuna, ready to assist." },
-      ...history.slice(-8).map((m) => ({ role: m.role as "user" | "assistant", content: m.content })),
+    // Proper Claude Bedrock format — system prompt in `system` field, not injected as fake user message
+    const systemPrompt = buildSystemPrompt(propertyContext, kbContext);
+
+    const chatMessages = [
+      ...history.slice(-8).map((m) => ({
+        role: m.role as "user" | "assistant",
+        content: m.content,
+      })),
       { role: "user" as const, content: message },
     ];
 
     const region  = process.env.AWS_REGION || "us-east-1";
-    // Haiku: fast + cheap for conversational replies. Upgrade to Sonnet if quality demands it.
     const modelId = process.env.SOPHIA_MODEL_ID || "us.anthropic.claude-3-5-haiku-20241022-v1:0";
 
     const { BedrockRuntimeClient, InvokeModelWithResponseStreamCommand } = await import("@aws-sdk/client-bedrock-runtime");
@@ -113,7 +119,9 @@ export async function POST(request: NextRequest) {
       contentType: "application/json",
       accept: "application/json",
       body: JSON.stringify({
-        messages,
+        anthropic_version: "bedrock-2023-05-31",
+        system: systemPrompt,
+        messages: chatMessages,
         max_tokens: MAX_TOKENS_PER_RESPONSE,
         temperature: 0.7,
         top_p: 0.9,
