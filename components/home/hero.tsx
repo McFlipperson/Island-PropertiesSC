@@ -3,8 +3,13 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { useUIStore } from "@/store/use-ui-store";
+import { useTranslations } from "@/lib/i18n/translations";
 
 export function Hero() {
+  const locale = useUIStore((s) => s.locale);
+  const t = useTranslations(locale);
+
   return (
     <section className="mx-auto w-full max-w-7xl px-4 pb-8 pt-6 sm:px-6 sm:pt-10">
       <motion.div
@@ -32,32 +37,29 @@ export function Hero() {
         className="px-1 pt-8 sm:pt-10"
       >
         <p className="mb-4 text-xs uppercase tracking-[0.28em] text-brand-gold sm:text-sm">
-          Your Gateway to Bohol Luxury Real Estate
+          {t.hero.eyebrow}
         </p>
         <h1 className="max-w-3xl text-4xl font-semibold leading-tight text-brand-emerald sm:text-6xl">
-          Natural Paradise. Zero Traffic. Direct from Seoul.
+          {t.hero.heading}
         </h1>
         <p className="mt-6 max-w-xl text-sm text-brand-emerald/85 sm:text-base">
-          Bohol Island offers pristine nature, white beaches, and the Chocolate Hills — with direct flights from Incheon. 
-          SRRV-friendly legal structures, fractional ownership options, and full-service property management for international buyers.
+          {t.hero.body}
         </p>
         <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
           <Link
-            href="/listings/panglao-cliffside-estate"
+            href="/listings"
             className="inline-flex rounded-full border border-brand-gold/70 bg-brand-gold px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-brand-emerald transition hover:bg-[#d3ad64]"
           >
-            View Available Properties
+            {t.hero.cta}
           </Link>
           <Link
             href="/#asset-selector"
             className="inline-flex rounded-full border border-brand-emerald/30 px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-brand-emerald transition hover:border-brand-gold hover:text-brand-gold"
           >
-            Explore Ownership Options
+            {t.hero.ctaSecondary}
           </Link>
         </div>
-        <p className="mt-6 text-xs text-brand-emerald/60">
-          🇰🇷 Korean-language support available • SRRV visa guidance • Fractional & full ownership
-        </p>
+        <p className="mt-6 text-xs text-brand-emerald/60">{t.hero.footnote}</p>
       </motion.div>
     </section>
   );

@@ -8,29 +8,35 @@ import { usePathname } from "next/navigation";
 import type { Currency } from "@/store/use-ui-store";
 import { useUIStore } from "@/store/use-ui-store";
 
-const navItems = [
-  { label: "Home", href: "/" },
-  { label: "Listings", href: "/listings/panglao-cliffside-estate" },
+const navItemsEn = [
+  { label: "Home",       href: "/" },
+  { label: "Properties", href: "/listings" },
+];
+const navItemsKo = [
+  { label: "홈",   href: "/" },
+  { label: "매물", href: "/listings" },
 ];
 
-const currencies: Currency[] = ["PHP", "USD"];
+const currencies: Currency[] = ["PHP", "USD", "KRW"];
 
 export function Navbar() {
-  const pathname = usePathname();
-  const currency = useUIStore((state) => state.currency);
-  const setCurrency = useUIStore((state) => state.setCurrency);
-  const isMenuOpen = useUIStore((state) => state.isMenuOpen);
-  const toggleMenu = useUIStore((state) => state.toggleMenu);
-  const closeMenu = useUIStore((state) => state.closeMenu);
+  const pathname    = usePathname();
+  const currency    = useUIStore((s) => s.currency);
+  const setCurrency = useUIStore((s) => s.setCurrency);
+  const locale      = useUIStore((s) => s.locale);
+  const toggleLocale = useUIStore((s) => s.toggleLocale);
+  const isMenuOpen  = useUIStore((s) => s.isMenuOpen);
+  const toggleMenu  = useUIStore((s) => s.toggleMenu);
+  const closeMenu   = useUIStore((s) => s.closeMenu);
+
+  const navItems = locale === "ko" ? navItemsKo : navItemsEn;
 
   return (
     <header className="sticky top-0 z-40 border-b border-brand-emerald/10 bg-brand-cream/70 backdrop-blur-md">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
-        <Link
-          href="/"
-          className="inline-flex items-center"
-          onClick={closeMenu}
-        >
+
+        {/* Logo */}
+        <Link href="/" className="inline-flex items-center" onClick={closeMenu}>
           <Image
             src="/assets/logo-transparent.png"
             alt="Island Properties logo"
@@ -41,25 +47,26 @@ export function Navbar() {
           />
         </Link>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
+
+          {/* Currency switcher — PHP / USD / KRW */}
           <div className="glass-panel relative inline-flex rounded-full p-1">
             {currencies.map((option) => {
               const isActive = option === currency;
-
               return (
                 <button
                   key={option}
                   type="button"
-                  className="relative z-10 rounded-full px-3 py-1.5 text-xs font-semibold tracking-wide sm:px-4"
+                  className="relative z-10 rounded-full px-2.5 py-1.5 text-xs font-semibold tracking-wide sm:px-3"
                   onClick={() => setCurrency(option)}
                 >
-                  {isActive ? (
+                  {isActive && (
                     <motion.span
                       layoutId="active-currency"
                       className="absolute inset-0 rounded-full bg-brand-emerald"
                       transition={{ type: "spring", stiffness: 350, damping: 28 }}
                     />
-                  ) : null}
+                  )}
                   <span className={`relative ${isActive ? "text-brand-cream" : "text-brand-emerald"}`}>
                     {option}
                   </span>
@@ -68,6 +75,17 @@ export function Navbar() {
             })}
           </div>
 
+          {/* Language toggle — EN / 한국어 */}
+          <button
+            type="button"
+            onClick={toggleLocale}
+            className="glass-panel rounded-full px-3 py-1.5 text-xs font-semibold tracking-wide text-brand-emerald transition hover:bg-brand-emerald/10"
+            title={locale === "en" ? "한국어로 보기" : "View in English"}
+          >
+            {locale === "en" ? "한국어" : "EN"}
+          </button>
+
+          {/* Hamburger */}
           <button
             type="button"
             aria-label="Toggle menu"
@@ -79,8 +97,9 @@ export function Navbar() {
         </div>
       </div>
 
+      {/* Mobile nav dropdown */}
       <AnimatePresence>
-        {isMenuOpen ? (
+        {isMenuOpen && (
           <motion.nav
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -92,7 +111,6 @@ export function Navbar() {
               {navItems.map((item) => {
                 const isActive =
                   pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
-
                 return (
                   <li key={item.href}>
                     <Link
@@ -111,7 +129,7 @@ export function Navbar() {
               })}
             </ul>
           </motion.nav>
-        ) : null}
+        )}
       </AnimatePresence>
     </header>
   );

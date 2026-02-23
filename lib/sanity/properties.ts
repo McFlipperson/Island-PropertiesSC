@@ -213,3 +213,12 @@ export async function getPropertyBySlug(slug: string): Promise<Property | null> 
     }
   }
 }
+
+export async function getAllProperties(): Promise<HomepageProperty[]> {
+  if (!projectId) {
+    const { getMockAllProperties } = await import("@/lib/mock/properties");
+    return getMockAllProperties();
+  }
+  // When Sanity is live, fetch all active listings
+  return getHomepageProperties();
+}

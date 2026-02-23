@@ -58,7 +58,7 @@ Edit `config.json`:
 {
   "budget_hard_cap": 20,
   "alert_thresholds": [18, 19, 20],
-  "expensive_models": ["anthropic.claude-opus-4-6-v1", "anthropic.claude-sonnet-4-5"],
+  "expensive_models": ["anthropic.claude-opus-4-6-v1", "global.anthropic.claude-sonnet-4-5"],
   "approved_models": ["deepseek.v3.2"],
   "aws_region": "us-east-1"
 }

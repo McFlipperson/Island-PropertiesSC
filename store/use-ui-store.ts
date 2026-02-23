@@ -2,10 +2,12 @@
 
 import { create } from "zustand";
 
-export type Currency = "PHP" | "USD";
+export type Currency = "PHP" | "USD" | "KRW";
+export type Locale   = "en" | "ko";
 
 type UIStore = {
   currency: Currency;
+  locale: Locale;
   isMenuOpen: boolean;
   activeVideoUrl: string | null;
   isVideoModalOpen: boolean;
@@ -13,7 +15,8 @@ type UIStore = {
   isSophiaSpeaking: boolean;
   sophiaPropertyContext: string | null;
   setCurrency: (currency: Currency) => void;
-  toggleCurrency: () => void;
+  setLocale: (locale: Locale) => void;
+  toggleLocale: () => void;
   toggleMenu: () => void;
   closeMenu: () => void;
   openVideoModal: (videoUrl: string) => void;
@@ -27,6 +30,7 @@ type UIStore = {
 
 export const useUIStore = create<UIStore>((set) => ({
   currency: "PHP",
+  locale: "en",
   isMenuOpen: false,
   activeVideoUrl: null,
   isVideoModalOpen: false,
@@ -34,22 +38,15 @@ export const useUIStore = create<UIStore>((set) => ({
   isSophiaSpeaking: false,
   sophiaPropertyContext: null,
   setCurrency: (currency) => set({ currency }),
-  toggleCurrency: () =>
-    set((state) => ({
-      currency: state.currency === "PHP" ? "USD" : "PHP",
-    })),
+  setLocale: (locale) => set({ locale }),
+  toggleLocale: () => set((state) => ({
+    locale: state.locale === "en" ? "ko" : "en",
+    currency: state.locale === "en" ? "KRW" : "PHP",
+  })),
   toggleMenu: () => set((state) => ({ isMenuOpen: !state.isMenuOpen })),
   closeMenu: () => set({ isMenuOpen: false }),
-  openVideoModal: (videoUrl) =>
-    set({
-      activeVideoUrl: videoUrl,
-      isVideoModalOpen: true,
-    }),
-  closeVideoModal: () =>
-    set({
-      activeVideoUrl: null,
-      isVideoModalOpen: false,
-    }),
+  openVideoModal: (videoUrl) => set({ activeVideoUrl: videoUrl, isVideoModalOpen: true }),
+  closeVideoModal: () => set({ activeVideoUrl: null, isVideoModalOpen: false }),
   openSophia: () => set({ isSophiaOpen: true }),
   closeSophia: () => set({ isSophiaOpen: false }),
   toggleSophia: () => set((state) => ({ isSophiaOpen: !state.isSophiaOpen })),

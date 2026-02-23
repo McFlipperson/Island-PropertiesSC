@@ -1,4 +1,6 @@
 export type PropertyCategory = "Residential" | "Commercial" | "Condo";
+export type PropertyTier = "Trophy" | "Yield" | "Timeshare" | "Land";
+export type PropertyStatus = "Active" | "Reserved" | "Sold" | "Coming Soon";
 export type PropertyTitleStatus = "Clean TCT" | "CCT" | "Tax Declaration" | "Mother Title";
 export type PropertyOwnership = "Freehold" | "Leasehold";
 export type PropertyFurnishing = "Fully Furnished" | "Semi-Furnished" | "Unfurnished";
@@ -24,21 +26,38 @@ export type PropertyInvestment = {
 
 export type HomepageProperty = {
   title: string;
+  title_ko?: string;
   slug: string;
   locationLabel: string;
+  locationLabel_ko?: string;
+  hook?: string;
+  hook_ko?: string;
   pricePhp: number;
+  priceKrw?: number;
+  tier?: PropertyTier;
+  status?: PropertyStatus;
+  srrv?: boolean;
   bedrooms: number;
   bathrooms: number;
   parking: number;
   floorArea: number;
   mainImage: string;
+  yieldPercent?: number;
 };
 
 export type Property = {
   title: string;
+  title_ko?: string;
   slug: string;
   locationLabel: string;
+  locationLabel_ko?: string;
+  hook?: string;
+  hook_ko?: string;
   pricePhp: number;
+  priceKrw?: number;
+  tier?: PropertyTier;
+  status?: PropertyStatus;
+  srrv?: boolean;
   bedrooms: number;
   bathrooms: number;
   parking: number;
@@ -54,6 +73,7 @@ export type Property = {
   gallery: string[];
   videoFile?: string;
   content: RichTextBlock[];
+  content_ko?: RichTextBlock[];
   features: string[];
   specs: PropertySpecs;
   distances: PropertyDistances;
