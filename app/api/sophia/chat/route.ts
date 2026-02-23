@@ -131,8 +131,10 @@ export async function POST(request: NextRequest) {
     const bedrockResponse = await client.send(command);
     session.failures = 0;
 
-    // ── Stream SSE back to client ─────────────────────────────
+    // ── Stream SSE back to client + capture token counts ─────
     const encoder = new TextEncoder();
+    let inputTokens  = 0;
+    let outputTokens = 0;
 
     const stream = new ReadableStream({
       async start(controller) {
@@ -140,14 +142,38 @@ export async function POST(request: NextRequest) {
           for await (const event of bedrockResponse.body!) {
             if (event.chunk?.bytes) {
               const decoded = JSON.parse(new TextDecoder().decode(event.chunk.bytes));
-              const delta = decoded.delta?.text ?? decoded.content?.[0]?.text ?? "";
+
+              // Capture token usage from Claude stream events
+              if (decoded.type === "message_start") {
+                inputTokens = decoded.message?.usage?.input_tokens ?? 0;
+              }
+              if (decoded.type === "message_delta") {
+                outputTokens = decoded.usage?.output_tokens ?? 0;
+              }
+
+              const delta = decoded.delta?.text ?? "";
               if (delta) {
                 controller.enqueue(encoder.encode(`data: ${JSON.stringify({ delta })}\n\n`));
               }
             }
           }
+
           controller.enqueue(encoder.encode("data: [DONE]\n\n"));
           controller.close();
+
+          // Log cost after stream completes (fire-and-forget)
+          fetch(`${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/cost-log`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              source:        "yuna-chat",
+              model:         modelId,
+              session_id:    sessionId,
+              input_tokens:  inputTokens,
+              output_tokens: outputTokens,
+            }),
+          }).catch(() => {}); // never block on cost logging
+
         } catch {
           session.failures++;
           controller.enqueue(encoder.encode(`data: ${JSON.stringify({ error: true })}\n\n`));
