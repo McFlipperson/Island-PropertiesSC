@@ -69,6 +69,7 @@ export const translations = {
       viewFull:     "View Full Listing",
       noListings:   "No listings in this category yet.",
       noListingsSub:"More properties coming soon — contact us for off-market options.",
+      offMarketEyebrow: "Off-Market & Upcoming",
       offMarketHeading: "Don't see what you're looking for?",
       offMarketBody:    "We have access to off-market listings not shown here. Tell Sophia what you need and we'll find it.",
       offMarketKo:      "원하시는 매물이 없으신가요? 소피아에게 문의해 주십시오.",
@@ -113,6 +114,11 @@ export const translations = {
       Yield:     "Yield",
       Timeshare: "Timeshare",
       Land:      "Land",
+    },
+    status: {
+      Reserved:      "Reserved",
+      Sold:          "Sold",
+      "Coming Soon": "Coming Soon",
     },
   },
 
@@ -184,6 +190,7 @@ export const translations = {
       viewFull:     "상세 보기",
       noListings:   "해당 카테고리의 매물이 아직 없습니다.",
       noListingsSub:"곧 새로운 매물이 등록될 예정입니다. 비공개 매물 문의는 저희에게 연락해 주십시오.",
+      offMarketEyebrow: "비공개 매물 & 신규 등록",
       offMarketHeading: "원하시는 매물이 없으십니까?",
       offMarketBody:    "공개되지 않은 비공개 매물도 보유하고 있습니다. 소피아에게 원하시는 조건을 말씀해 주시면 찾아드리겠습니다.",
       offMarketKo:      "",
@@ -228,6 +235,11 @@ export const translations = {
       Yield:     "수익형",
       Timeshare: "타임쉐어",
       Land:      "토지",
+    },
+    status: {
+      Reserved:      "예약 중",
+      Sold:          "판매 완료",
+      "Coming Soon": "곧 등록 예정",
     },
   },
 } as const;

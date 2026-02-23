@@ -16,7 +16,6 @@ export function formatPrice(pricePhp: number, currency: Currency): string {
   const converted = convertPrice(pricePhp, currency);
 
   if (currency === "KRW") {
-    // Korean format: 억 (100M) / 만 (10K)
     if (converted >= 1_000_000_000) {
       return `₩${(converted / 1_000_000_000).toFixed(1)}B`;
     }
@@ -31,4 +30,20 @@ export function formatPrice(pricePhp: number, currency: Currency): string {
     currency: currency === "PHP" ? "PHP" : "USD",
     maximumFractionDigits: 0,
   }).format(converted);
+}
+
+/** Convert a USD amount to the selected display currency and format it */
+export function formatUsd(amountUsd: number, currency: Currency): string {
+  // Convert USD → PHP first, then reuse formatPrice
+  const asPhp = amountUsd * PHP_TO_USD;
+  return formatPrice(asPhp, currency);
+}
+
+/** Return the currency symbol/label for the ROI section heading */
+export function currencyLabel(currency: Currency): string {
+  switch (currency) {
+    case "KRW": return "KRW";
+    case "USD": return "USD";
+    default:    return "PHP";
+  }
 }

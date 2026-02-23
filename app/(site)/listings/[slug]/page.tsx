@@ -4,9 +4,10 @@ import { PrivacyList } from "@/components/listing/privacy-list";
 import { ROISnapshot } from "@/components/listing/roi-snapshot";
 import { SpecsGrid } from "@/components/listing/specs-grid";
 import { VideoModal } from "@/components/listing/video-modal";
+import { ListingDetailBody } from "@/components/listing/listing-detail-body";
+import { RequestViewingButton } from "@/components/listing/request-viewing-button";
 import { SophiaListingWrapper } from "@/components/sophia/sophia-listing-wrapper";
 import { getPropertyBySlug } from "@/lib/sanity/properties";
-import { PortableText } from "@portabletext/react";
 import { unstable_noStore as noStore } from "next/cache";
 import { notFound } from "next/navigation";
 
@@ -24,7 +25,6 @@ export default async function ListingPage({ params }: ListingPageProps) {
     notFound();
   }
 
-  // Build property context string for Sophia
   const propertyContext = `
 Property: ${property.title}
 Location: ${property.locationLabel}
@@ -48,7 +48,9 @@ Investment: Daily Rate $${property.investment.dailyRateUsd} USD, Yield ${propert
       <section className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-10 sm:px-6 sm:py-12">
         <HeroInfo
           title={property.title}
+          title_ko={property.title_ko}
           locationLabel={property.locationLabel}
+          locationLabel_ko={property.locationLabel_ko}
           pricePhp={property.pricePhp}
           category={property.category}
           bedrooms={property.bedrooms}
@@ -61,60 +63,8 @@ Investment: Daily Rate $${property.investment.dailyRateUsd} USD, Yield ${propert
 
       <section className="mx-auto grid w-full max-w-7xl gap-8 px-4 pb-10 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
         <div className="space-y-8">
-          <article className="space-y-4 rounded-3xl border border-brand-emerald/10 bg-white/60 p-6 shadow-glass">
-            <p className="text-xs uppercase tracking-[0.24em] text-brand-emerald/70">
-              Concierge Narrative
-            </p>
-            <div className="space-y-3 text-base leading-relaxed text-brand-emerald/85">
-              <PortableText value={property.content} />
-            </div>
-            <p className="inline-flex rounded-full bg-brand-emerald px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-brand-cream">
-              Ownership: {property.ownership}
-            </p>
-          </article>
-
-          <article className="space-y-4 rounded-3xl border border-brand-emerald/10 bg-white/60 p-6 shadow-glass">
-            <h2 className="font-heading text-2xl text-brand-emerald">Legal & Specs</h2>
-            <div className="grid gap-2 sm:grid-cols-2">
-              <div className="rounded-xl border border-brand-emerald/10 bg-white/65 px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.12em] text-brand-emerald/70">
-                  Title Status
-                </p>
-                <p className="mt-1 text-sm font-semibold text-brand-emerald">{property.titleStatus}</p>
-              </div>
-              <div className="rounded-xl border border-brand-emerald/10 bg-white/65 px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.12em] text-brand-emerald/70">Year Built</p>
-                <p className="mt-1 text-sm font-semibold text-brand-emerald">{property.yearBuilt}</p>
-              </div>
-              <div className="rounded-xl border border-brand-emerald/10 bg-white/65 px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.12em] text-brand-emerald/70">Furnishing</p>
-                <p className="mt-1 text-sm font-semibold text-brand-emerald">{property.furnishing}</p>
-              </div>
-              <div className="rounded-xl border border-brand-emerald/10 bg-white/65 px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.12em] text-brand-emerald/70">
-                  Monthly HOA (PHP)
-                </p>
-                <p className="mt-1 text-sm font-semibold text-brand-emerald">
-                  {property.hoaFees.toLocaleString("en-PH")}
-                </p>
-              </div>
-            </div>
-          </article>
-
-          <article className="space-y-4 rounded-3xl border border-brand-emerald/10 bg-white/60 p-6 shadow-glass">
-            <h2 className="font-heading text-2xl text-brand-emerald">Amenities</h2>
-            <div className="flex flex-wrap gap-2">
-              {property.features.map((feature) => (
-                <span
-                  key={feature}
-                  className="rounded-full border border-brand-emerald/15 bg-white/70 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.08em] text-brand-emerald"
-                >
-                  {feature}
-                </span>
-              ))}
-            </div>
-          </article>
-          <SpecsGrid specs={property.specs} />
+          <ListingDetailBody property={property} />
+          <SpecsGrid specs={property.specs} specs_ko={property.specs_ko} />
         </div>
 
         <div className="space-y-8">
@@ -124,20 +74,8 @@ Investment: Daily Rate $${property.investment.dailyRateUsd} USD, Yield ${propert
       </section>
 
       <VideoModal />
-
-      {/* Sophia context provider for this listing */}
       <SophiaListingWrapper propertyContext={propertyContext} />
-
-      <div className="fixed inset-x-0 bottom-0 z-[60] border-t border-brand-emerald/15 bg-brand-cream/92 p-4 backdrop-blur-md">
-        <div className="mx-auto w-full max-w-7xl">
-          <button
-            type="button"
-            className="w-full rounded-full bg-brand-emerald px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-brand-cream transition hover:bg-[#05583a]"
-          >
-            Request Private Viewing
-          </button>
-        </div>
-      </div>
+      <RequestViewingButton />
     </main>
   );
 }

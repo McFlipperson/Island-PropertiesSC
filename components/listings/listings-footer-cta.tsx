@@ -11,7 +11,7 @@ export function ListingsPageFooterCta() {
     <section className="border-t border-brand-emerald/10 bg-brand-emerald px-4 py-14 sm:px-6">
       <div className="mx-auto max-w-3xl text-center">
         <p className="text-xs uppercase tracking-[0.24em] text-brand-cream/60">
-          Off-Market & Upcoming
+          {t.listings.offMarketEyebrow}
         </p>
         <h2 className="mt-3 font-heading text-3xl font-semibold text-brand-cream sm:text-4xl">
           {t.listings.offMarketHeading}
@@ -19,11 +19,6 @@ export function ListingsPageFooterCta() {
         <p className="mt-4 text-base leading-relaxed text-brand-cream/75">
           {t.listings.offMarketBody}
         </p>
-        {locale === "en" && (
-          <p className="mt-2 text-sm text-brand-cream/50">
-            원하시는 매물이 없으신가요? 소피아에게 문의해 주십시오.
-          </p>
-        )}
         <a
           href="/#contact"
           className="mt-8 inline-flex rounded-full bg-brand-cream px-8 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-brand-emerald transition hover:bg-brand-gold hover:text-white"

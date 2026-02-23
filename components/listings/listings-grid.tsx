@@ -118,7 +118,9 @@ export function ListingsGrid({ properties }: Props) {
                 )}
                 {p.status && p.status !== "Active" && (
                   <span className={`absolute right-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.1em] backdrop-blur-sm ${STATUS_COLORS[p.status] ?? ""}`}>
-                    {p.status}
+                    {locale === "ko"
+                      ? ((t.status as Record<string, string>)[p.status] ?? p.status)
+                      : p.status}
                   </span>
                 )}
                 {p.srrv && (

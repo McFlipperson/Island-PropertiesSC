@@ -75,7 +75,9 @@ export type Property = {
   content: RichTextBlock[];
   content_ko?: RichTextBlock[];
   features: string[];
+  features_ko?: string[];
   specs: PropertySpecs;
+  specs_ko?: PropertySpecs;
   distances: PropertyDistances;
   investment: PropertyInvestment;
 };

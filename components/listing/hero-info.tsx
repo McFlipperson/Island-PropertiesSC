@@ -4,11 +4,14 @@ import { motion } from "framer-motion";
 import { Bath, BedDouble, Car, MapPin, Square } from "lucide-react";
 import { formatPrice } from "@/lib/utils/convert-price";
 import { useUIStore } from "@/store/use-ui-store";
+import { useTranslations } from "@/lib/i18n/translations";
 import type { PropertyCategory } from "@/types/property";
 
 type HeroInfoProps = {
   title: string;
+  title_ko?: string;
   locationLabel: string;
+  locationLabel_ko?: string;
   pricePhp: number;
   category: PropertyCategory;
   bedrooms: number;
@@ -19,7 +22,9 @@ type HeroInfoProps = {
 
 export function HeroInfo({
   title,
+  title_ko,
   locationLabel,
+  locationLabel_ko,
   pricePhp,
   category,
   bedrooms,
@@ -27,12 +32,18 @@ export function HeroInfo({
   parking,
   floorArea,
 }: HeroInfoProps) {
-  const currency = useUIStore((state) => state.currency);
+  const currency = useUIStore((s) => s.currency);
+  const locale   = useUIStore((s) => s.locale);
+  const t        = useTranslations(locale);
+
+  const displayTitle    = locale === "ko" && title_ko    ? title_ko    : title;
+  const displayLocation = locale === "ko" && locationLabel_ko ? locationLabel_ko : locationLabel;
+
   const vitals = [
-    { label: "Beds", value: bedrooms, icon: BedDouble },
-    { label: "Baths", value: bathrooms, icon: Bath },
-    { label: "Cars", value: parking, icon: Car },
-    { label: "Area", value: `${floorArea} sqm`, icon: Square },
+    { label: t.listings.beds,  value: bedrooms,        icon: BedDouble },
+    { label: t.listings.baths, value: bathrooms,        icon: Bath },
+    { label: locale === "ko" ? "주차" : "Cars", value: parking, icon: Car },
+    { label: locale === "ko" ? "면적" : "Area", value: `${floorArea} sqm`, icon: Square },
   ];
 
   return (
@@ -46,13 +57,13 @@ export function HeroInfo({
         {category}
       </p>
       <h1 className="font-heading text-4xl font-semibold leading-tight text-brand-emerald sm:text-5xl">
-        {title}
+        {displayTitle}
       </h1>
 
       <div className="flex flex-wrap items-center gap-4">
         <p className="inline-flex items-center gap-2 text-sm text-brand-emerald/75">
           <MapPin className="h-4 w-4" />
-          {locationLabel}
+          {displayLocation}
         </p>
         <p className="text-xl font-semibold text-brand-emerald sm:text-2xl">
           {formatPrice(pricePhp, currency)}

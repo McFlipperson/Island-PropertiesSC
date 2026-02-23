@@ -5,15 +5,18 @@ import { useUIStore } from "@/store/use-ui-store";
 import { useTranslations } from "@/lib/i18n/translations";
 import type { PropertySpecs } from "@/types/property";
 
-export function SpecsGrid({ specs }: { specs: PropertySpecs }) {
+type Props = { specs: PropertySpecs; specs_ko?: PropertySpecs };
+
+export function SpecsGrid({ specs, specs_ko }: Props) {
   const locale = useUIStore((s) => s.locale);
   const t = useTranslations(locale);
+  const s = (locale === "ko" && specs_ko) ? specs_ko : specs;
 
   const items = [
-    { label: t.listing.power,      value: specs.generator ? t.listing.generatorOn : t.listing.generatorOff, icon: Bolt },
-    { label: t.listing.water,      value: specs.waterSource,  icon: Droplets },
-    { label: t.listing.internet,   value: specs.internetType, icon: Wifi },
-    { label: t.listing.roadAccess, value: specs.roadAccess,   icon: Route },
+    { label: t.listing.power,      value: s.generator ? t.listing.generatorOn : t.listing.generatorOff, icon: Bolt },
+    { label: t.listing.water,      value: s.waterSource,  icon: Droplets },
+    { label: t.listing.internet,   value: s.internetType, icon: Wifi },
+    { label: t.listing.roadAccess, value: s.roadAccess,   icon: Route },
   ];
 
   return (
