@@ -1,3 +1,3 @@
-export { SophiaChat } from "./sophia-chat";
-export { SophiaFab } from "./sophia-fab";
-export { SophiaListingWrapper } from "./sophia-listing-wrapper";
+export { YunaChat } from "./sophia-chat";
+export { YunaFab } from "./sophia-fab";
+export { YunaListingWrapper } from "./sophia-listing-wrapper";

@@ -12,12 +12,12 @@ type Message = {
   timestamp: Date;
 };
 
-export function SophiaChat() {
-  const isSophiaOpen = useUIStore((state) => state.isSophiaOpen);
-  const closeSophia = useUIStore((state) => state.closeSophia);
-  const isSophiaSpeaking = useUIStore((state) => state.isSophiaSpeaking);
-  const setSophiaSpeaking = useUIStore((state) => state.setSophiaSpeaking);
-  const propertyContext = useUIStore((state) => state.sophiaPropertyContext);
+export function YunaChat() {
+  const isYunaOpen = useUIStore((state) => state.isYunaOpen);
+  const closeYuna = useUIStore((state) => state.closeYuna);
+  const isYunaSpeaking = useUIStore((state) => state.isYunaSpeaking);
+  const setYunaSpeaking = useUIStore((state) => state.setYunaSpeaking);
+  const propertyContext = useUIStore((state) => state.yunaPropertyContext);
 
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -40,22 +40,22 @@ export function SophiaChat() {
 
   // Focus input when opened
   useEffect(() => {
-    if (isSophiaOpen) {
+    if (isYunaOpen) {
       setTimeout(() => inputRef.current?.focus(), 300);
     }
-  }, [isSophiaOpen]);
+  }, [isYunaOpen]);
 
   // Greeting on first open
   useEffect(() => {
-    if (isSophiaOpen && !hasGreeted) {
+    if (isYunaOpen && !hasGreeted) {
       const isKo = locale === "ko";
       const greeting = isKo
         ? propertyContext
-          ? "안녕하십니까, 고객님. 저는 소피아입니다. 선택하신 매물에 관심을 가져 주셔서 감사드립니다. 투자 수익, 소유권 구조, 또는 라이프스타일 관련 궁금하신 점이 있으시면 말씀해 주십시오."
-          : "안녕하십니까, 고객님. 저는 보홀 럭셔리 부동산 전문 컨시어지 소피아입니다. 투자 기회를 찾고 계시거나 최적의 아일랜드 리트리트를 원하신다면, 세심하게 안내해 드리겠습니다. 오늘 Island Properties를 방문해 주신 이유가 있으신지요?"
+          ? "안녕하십니까, 고객님. 저는 유나입니다. 선택하신 매물에 관심을 가져 주셔서 감사드립니다. 투자 수익, 소유권 구조, 또는 라이프스타일 관련 궁금하신 점이 있으시면 말씀해 주십시오."
+          : "안녕하십니까, 고객님. 저는 보홀 럭셔리 부동산 전문 컨시어지 유나입니다. 투자 기회를 찾고 계시거나 최적의 아일랜드 리트리트를 원하신다면, 세심하게 안내해 드리겠습니다. 오늘 Island Properties를 방문해 주신 이유가 있으신지요?"
         : propertyContext
-          ? "Welcome — I'm Sophia, your personal property consultant. I see you're exploring one of our exclusive listings. What would you like to know — the investment potential, ownership structures, or lifestyle features?"
-          : "Welcome — I'm Sophia, your personal property consultant for luxury real estate in Bohol. Whether you're exploring investment opportunities or searching for the perfect island retreat, I'm here to guide you. What brings you to Island Properties today?";
+          ? "Welcome — I'm Yuna, your personal property consultant. I see you're exploring one of our exclusive listings. What would you like to know — the investment potential, ownership structures, or lifestyle features?"
+          : "Welcome — I'm Yuna, your personal property consultant for luxury real estate in Bohol. Whether you're exploring investment opportunities or searching for the perfect island retreat, I'm here to guide you. What brings you to Island Properties today?";
 
       const greetingMsg: Message = {
         id: `sophia-${Date.now()}`,
@@ -71,13 +71,13 @@ export function SophiaChat() {
         playVoice(greeting);
       }
     }
-  }, [isSophiaOpen, hasGreeted, locale]);
+  }, [isYunaOpen, hasGreeted, locale]);
 
   // Play voice via Polly API
   const playVoice = useCallback(
     async (text: string) => {
       try {
-        setSophiaSpeaking(true);
+        setYunaSpeaking(true);
 
         const response = await fetch("/api/sophia/voice", {
           method: "POST",
@@ -86,7 +86,7 @@ export function SophiaChat() {
         });
 
         if (!response.ok) {
-          setSophiaSpeaking(false);
+          setYunaSpeaking(false);
           return;
         }
 
@@ -101,21 +101,21 @@ export function SophiaChat() {
         audioRef.current = audio;
 
         audio.onended = () => {
-          setSophiaSpeaking(false);
+          setYunaSpeaking(false);
           URL.revokeObjectURL(audioUrl);
         };
 
         audio.onerror = () => {
-          setSophiaSpeaking(false);
+          setYunaSpeaking(false);
           URL.revokeObjectURL(audioUrl);
         };
 
         await audio.play();
       } catch {
-        setSophiaSpeaking(false);
+        setYunaSpeaking(false);
       }
     },
-    [sessionId, setSophiaSpeaking],
+    [sessionId, setYunaSpeaking],
   );
 
   // Stop current audio
@@ -123,9 +123,9 @@ export function SophiaChat() {
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
-      setSophiaSpeaking(false);
+      setYunaSpeaking(false);
     }
-  }, [setSophiaSpeaking]);
+  }, [setYunaSpeaking]);
 
   // Send message
   const handleSend = useCallback(
@@ -196,7 +196,7 @@ export function SophiaChat() {
     [input, isLoading, messages, propertyContext, sessionId, isVoiceEnabled, playVoice],
   );
 
-  if (!isSophiaOpen) return null;
+  if (!isYunaOpen) return null;
 
   return (
     <AnimatePresence>
@@ -213,10 +213,10 @@ export function SophiaChat() {
             <div className="relative">
               <img
                 src="/assets/sophia-avatar.png"
-                alt="Sophia"
+                alt="Yuna"
                 className="h-10 w-10 rounded-full object-cover border-2 border-brand-gold/60"
               />
-              {isSophiaSpeaking && (
+              {isYunaSpeaking && (
                 <motion.div
                   animate={{ scale: [1, 1.3, 1] }}
                   transition={{ repeat: Infinity, duration: 1.2 }}
@@ -236,7 +236,7 @@ export function SophiaChat() {
             <button
               type="button"
               onClick={() => {
-                if (isSophiaSpeaking) stopAudio();
+                if (isYunaSpeaking) stopAudio();
                 setIsVoiceEnabled(!isVoiceEnabled);
               }}
               className="rounded-full p-1.5 text-brand-cream/70 transition hover:bg-white/10 hover:text-brand-cream"
@@ -249,7 +249,7 @@ export function SophiaChat() {
               type="button"
               onClick={() => {
                 stopAudio();
-                closeSophia();
+                closeYuna();
               }}
               className="rounded-full p-1.5 text-brand-cream/70 transition hover:bg-white/10 hover:text-brand-cream"
             >
@@ -282,7 +282,7 @@ export function SophiaChat() {
                     <button
                       type="button"
                       onClick={() => {
-                        if (isSophiaSpeaking) {
+                        if (isYunaSpeaking) {
                           stopAudio();
                         } else {
                           playVoice(msg.content);
@@ -290,7 +290,7 @@ export function SophiaChat() {
                       }}
                       className="mt-1.5 flex items-center gap-1 text-[10px] uppercase tracking-[0.1em] text-brand-gold transition hover:text-brand-emerald"
                     >
-                      {isSophiaSpeaking ? (
+                      {isYunaSpeaking ? (
                         <>
                           <Pause className="h-3 w-3" /> Stop
                         </>
@@ -354,7 +354,7 @@ export function SophiaChat() {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask Sophia anything..."
+            placeholder="Ask Yuna anything..."
             disabled={isLoading}
             className="flex-1 bg-transparent text-sm text-brand-emerald placeholder:text-brand-emerald/40 focus:outline-none"
           />

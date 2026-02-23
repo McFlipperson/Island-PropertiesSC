@@ -11,9 +11,9 @@ type UIStore = {
   isMenuOpen: boolean;
   activeVideoUrl: string | null;
   isVideoModalOpen: boolean;
-  isSophiaOpen: boolean;
-  isSophiaSpeaking: boolean;
-  sophiaPropertyContext: string | null;
+  isYunaOpen: boolean;
+  isYunaSpeaking: boolean;
+  yunaPropertyContext: string | null;
   setCurrency: (currency: Currency) => void;
   setLocale: (locale: Locale) => void;
   toggleLocale: () => void;
@@ -21,11 +21,11 @@ type UIStore = {
   closeMenu: () => void;
   openVideoModal: (videoUrl: string) => void;
   closeVideoModal: () => void;
-  openSophia: () => void;
-  closeSophia: () => void;
-  toggleSophia: () => void;
-  setSophiaSpeaking: (speaking: boolean) => void;
-  setSophiaPropertyContext: (context: string | null) => void;
+  openYuna: () => void;
+  closeYuna: () => void;
+  toggleYuna: () => void;
+  setYunaSpeaking: (speaking: boolean) => void;
+  setYunaPropertyContext: (context: string | null) => void;
 };
 
 export const useUIStore = create<UIStore>((set) => ({
@@ -34,9 +34,9 @@ export const useUIStore = create<UIStore>((set) => ({
   isMenuOpen: false,
   activeVideoUrl: null,
   isVideoModalOpen: false,
-  isSophiaOpen: false,
-  isSophiaSpeaking: false,
-  sophiaPropertyContext: null,
+  isYunaOpen: false,
+  isYunaSpeaking: false,
+  yunaPropertyContext: null,
   setCurrency: (currency) => set({ currency }),
   setLocale: (locale) => set({ locale }),
   toggleLocale: () => set((state) => ({
@@ -47,9 +47,9 @@ export const useUIStore = create<UIStore>((set) => ({
   closeMenu: () => set({ isMenuOpen: false }),
   openVideoModal: (videoUrl) => set({ activeVideoUrl: videoUrl, isVideoModalOpen: true }),
   closeVideoModal: () => set({ activeVideoUrl: null, isVideoModalOpen: false }),
-  openSophia: () => set({ isSophiaOpen: true }),
-  closeSophia: () => set({ isSophiaOpen: false }),
-  toggleSophia: () => set((state) => ({ isSophiaOpen: !state.isSophiaOpen })),
-  setSophiaSpeaking: (speaking) => set({ isSophiaSpeaking: speaking }),
-  setSophiaPropertyContext: (context) => set({ sophiaPropertyContext: context }),
+  openYuna: () => set({ isYunaOpen: true }),
+  closeYuna: () => set({ isYunaOpen: false }),
+  toggleYuna: () => set((state) => ({ isYunaOpen: !state.isYunaOpen })),
+  setYunaSpeaking: (speaking) => set({ isYunaSpeaking: speaking }),
+  setYunaPropertyContext: (context) => set({ yunaPropertyContext: context }),
 }));

@@ -3,21 +3,21 @@
 import { useEffect } from "react";
 import { useUIStore } from "@/store/use-ui-store";
 
-type SophiaListingWrapperProps = {
+type YunaListingWrapperProps = {
   propertyContext: string;
 };
 
 /**
- * Sets the property context in the UI store so Sophia
+ * Sets the property context in the UI store so Yuna
  * knows about the current listing. Cleans up on unmount.
  */
-export function SophiaListingWrapper({ propertyContext }: SophiaListingWrapperProps) {
-  const setSophiaPropertyContext = useUIStore((state) => state.setSophiaPropertyContext);
+export function YunaListingWrapper({ propertyContext }: YunaListingWrapperProps) {
+  const setYunaPropertyContext = useUIStore((state) => state.setYunaPropertyContext);
 
   useEffect(() => {
-    setSophiaPropertyContext(propertyContext);
-    return () => setSophiaPropertyContext(null);
-  }, [propertyContext, setSophiaPropertyContext]);
+    setYunaPropertyContext(propertyContext);
+    return () => setYunaPropertyContext(null);
+  }, [propertyContext, setYunaPropertyContext]);
 
   return null;
 }

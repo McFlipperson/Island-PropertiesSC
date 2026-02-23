@@ -6,7 +6,7 @@ import { SpecsGrid } from "@/components/listing/specs-grid";
 import { VideoModal } from "@/components/listing/video-modal";
 import { ListingDetailBody } from "@/components/listing/listing-detail-body";
 import { RequestViewingButton } from "@/components/listing/request-viewing-button";
-import { SophiaListingWrapper } from "@/components/sophia/sophia-listing-wrapper";
+import { YunaListingWrapper } from "@/components/sophia/sophia-listing-wrapper";
 import { getPropertyBySlug } from "@/lib/sanity/properties";
 import { unstable_noStore as noStore } from "next/cache";
 import { notFound } from "next/navigation";
@@ -74,7 +74,7 @@ Investment: Daily Rate $${property.investment.dailyRateUsd} USD, Yield ${propert
       </section>
 
       <VideoModal />
-      <SophiaListingWrapper propertyContext={propertyContext} />
+      <YunaListingWrapper propertyContext={propertyContext} />
       <RequestViewingButton />
     </main>
   );

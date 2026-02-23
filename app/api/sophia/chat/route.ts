@@ -38,13 +38,13 @@ async function searchKB(query: string): Promise<string> {
       .map((r) => r.text)
       .join("\n\n");
   } catch {
-    return ""; // KB unavailable — Sophia falls back to built-in knowledge
+    return ""; // KB unavailable — Yuna falls back to built-in knowledge
   }
 }
 
 // ── System Prompt ─────────────────────────────────────────────
 function buildSystemPrompt(propertyContext: string | null, kbContext: string) {
-  return `You are Sophia, a sophisticated luxury property consultant for Island Properties SC in Bohol, Philippines.
+  return `You are Yuna, a sophisticated luxury property consultant for Island Properties SC in Bohol, Philippines.
 
 LANGUAGE RULE — CRITICAL:
 Detect the language the visitor is writing in and ALWAYS respond in the same language.
@@ -129,7 +129,7 @@ export async function POST(request: NextRequest) {
 
     const messages = [
       { role: "user" as const, content: buildSystemPrompt(propertyContext, kbContext) },
-      { role: "assistant" as const, content: "Understood. I am Sophia, ready to assist." },
+      { role: "assistant" as const, content: "Understood. I am Yuna, ready to assist." },
       ...history.slice(-10).map((msg) => ({
         role: msg.role as "user" | "assistant",
         content: msg.content,
@@ -170,7 +170,7 @@ export async function POST(request: NextRequest) {
         retries++;
         session.failures++;
         if (retries >= MAX_RETRIES) {
-          console.error("Sophia chat error after retries:", error);
+          console.error("Yuna chat error after retries:", error);
           reply = "I appreciate your patience — please try again, or contact our team directly for immediate assistance.";
         } else {
           await new Promise((r) => setTimeout(r, 1000 * retries));
@@ -184,7 +184,7 @@ export async function POST(request: NextRequest) {
       remainingMessages: MAX_REQUESTS_PER_SESSION - session.count,
     });
   } catch (error) {
-    console.error("Sophia route error:", error);
+    console.error("Yuna route error:", error);
     return NextResponse.json({
       reply: "Could you try your question again? Or reach out through our contact form for immediate assistance.",
     });

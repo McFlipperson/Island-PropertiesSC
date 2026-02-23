@@ -92,7 +92,7 @@ export async function POST(request: NextRequest) {
       },
     });
   } catch (error) {
-    console.error("Sophia voice API error:", error);
+    console.error("Yuna voice API error:", error);
     return NextResponse.json(
       { error: "Voice generation temporarily unavailable" },
       { status: 500 },
