@@ -1,8 +1,12 @@
 import { NextRequest } from "next/server";
 
+// ── Kill Switch ────────────────────────────────────────────────
+// Set YUNA_ENABLED=false in .env.local to disable Yuna instantly (restart only — no rebuild needed)
+const YUNA_ENABLED = (process.env.YUNA_ENABLED ?? "true").toLowerCase() !== "false";
+
 // ── Cost Controls ──────────────────────────────────────────────
 const MAX_REQUESTS_PER_SESSION = 50;
-const MAX_TOKENS_PER_RESPONSE  = 250;
+const MAX_TOKENS_PER_RESPONSE  = 400; // bumped for Sonnet 4.6 richer responses
 const SESSION_TIMEOUT_MS       = 30 * 60 * 1000;
 const CIRCUIT_BREAKER_THRESHOLD = 5;
 
@@ -83,6 +87,14 @@ export async function POST(request: NextRequest) {
 
     if (!message) return new Response("Message required", { status: 400 });
 
+    // Kill switch — flip YUNA_ENABLED=false in .env.local + restart to disable
+    if (!YUNA_ENABLED) {
+      return Response.json({
+        reply: "Our concierge service is temporarily offline for maintenance. Please contact us directly at hello@islandpropertiesph.com or use the contact form below.",
+        disabled: true,
+      });
+    }
+
     const session = getSession(sessionId);
 
     if (session.count >= MAX_REQUESTS_PER_SESSION) {
@@ -124,7 +136,6 @@ export async function POST(request: NextRequest) {
         messages: chatMessages,
         max_tokens: MAX_TOKENS_PER_RESPONSE,
         temperature: 0.7,
-        top_p: 0.9,
       }),
     });
 
