@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
         voice_settings: {
           stability: 0.75,
           similarity_boost: 0.8,
-          style: 0.3, // Subtle warmth for Sophia's character
+          style: 0.3, // Subtle warmth for Yuna's character
           use_speaker_boost: true
         }
       })

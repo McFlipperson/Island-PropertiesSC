@@ -44,22 +44,32 @@ export function Navbar() {
             alt="Island Properties logo"
             width={420}
             height={120}
-            className="h-14 w-auto sm:h-16"
+            className="h-10 w-auto sm:h-12"
             priority
           />
         </Link>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
 
-          {/* Currency switcher — PHP / USD / KRW */}
-          <div className="glass-panel relative inline-flex rounded-full p-1">
+          {/* Language toggle — flag emoji */}
+          <button
+            type="button"
+            onClick={toggleLocale}
+            className="text-3xl leading-none transition hover:scale-110"
+            title={locale === "en" ? "한국어로 보기" : "View in English"}
+          >
+            {locale === "en" ? "🇰🇷" : "🇺🇸"}
+          </button>
+
+          {/* Currency switcher — smaller, PHP / USD / KRW */}
+          <div className="glass-panel relative inline-flex rounded-full p-0.5">
             {currencies.map((option) => {
               const isActive = option === currency;
               return (
                 <button
                   key={option}
                   type="button"
-                  className="relative z-10 rounded-full px-2.5 py-1.5 text-xs font-semibold tracking-wide sm:px-3"
+                  className="relative z-10 rounded-full px-1.5 py-1 text-[10px] font-semibold tracking-wide sm:px-2"
                   onClick={() => setCurrency(option)}
                 >
                   {isActive && (
@@ -77,24 +87,14 @@ export function Navbar() {
             })}
           </div>
 
-          {/* Language toggle — EN / 한국어 */}
-          <button
-            type="button"
-            onClick={toggleLocale}
-            className="glass-panel rounded-full px-3 py-1.5 text-xs font-semibold tracking-wide text-brand-emerald transition hover:bg-brand-emerald/10"
-            title={locale === "en" ? "한국어로 보기" : "View in English"}
-          >
-            {locale === "en" ? "한국어" : "EN"}
-          </button>
-
           {/* Hamburger */}
           <button
             type="button"
             aria-label="Toggle menu"
             onClick={toggleMenu}
-            className="glass-panel flex h-10 w-10 items-center justify-center rounded-full text-brand-emerald transition hover:bg-white/70"
+            className="glass-panel flex h-9 w-9 items-center justify-center rounded-full text-brand-emerald transition hover:bg-white/70"
           >
-            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
         </div>
       </div>

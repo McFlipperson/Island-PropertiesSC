@@ -10,6 +10,9 @@ export function ROISnapshot({ investment }: { investment: PropertyInvestment }) 
   const locale   = useUIStore((s) => s.locale);
   const t        = useTranslations(locale);
 
+  // Hide entirely if no confirmed investment data
+  if (!investment.dailyRateUsd && !investment.yieldPercent) return null;
+
   const yearlyGrossUsd = investment.dailyRateUsd * 365;
 
   return (

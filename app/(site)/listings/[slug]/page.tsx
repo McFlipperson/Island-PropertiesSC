@@ -36,7 +36,7 @@ Title Status: ${property.titleStatus}
 Ownership: ${property.ownership}
 Year Built: ${property.yearBuilt}
 Furnishing: ${property.furnishing}
-HOA Fees: ₱${property.hoaFees.toLocaleString("en-PH")}/month
+HOA Fees: ${property.hoaFees > 0 ? `₱${property.hoaFees.toLocaleString("en-PH")}/month` : "Confirm with agent"}
 Features: ${property.features.join(", ")}
 Infrastructure: Power ${property.specs.generator ? "(Generator Backup)" : "(Grid Only)"}, Water: ${property.specs.waterSource}, Internet: ${property.specs.internetType}, Road: ${property.specs.roadAccess}
 Proximity: Airport ${property.distances.airportMins} mins, Beach ${property.distances.beachMins} mins, Hospital ${property.distances.hospitalMins} mins
@@ -51,6 +51,7 @@ Investment: Daily Rate $${property.investment.dailyRateUsd} USD, Yield ${propert
           title_ko={property.title_ko}
           locationLabel={property.locationLabel}
           locationLabel_ko={property.locationLabel_ko}
+          address={property.address}
           pricePhp={property.pricePhp}
           category={property.category}
           bedrooms={property.bedrooms}
@@ -75,7 +76,7 @@ Investment: Daily Rate $${property.investment.dailyRateUsd} USD, Yield ${propert
 
       <VideoModal />
       <YunaListingWrapper propertyContext={propertyContext} />
-      <RequestViewingButton />
+      <RequestViewingButton propertyName={property.title} propertySlug={params.slug} />
     </main>
   );
 }

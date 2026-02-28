@@ -71,7 +71,7 @@ export const translations = {
       noListingsSub:"More properties coming soon — contact us for off-market options.",
       offMarketEyebrow: "Off-Market & Upcoming",
       offMarketHeading: "Don't see what you're looking for?",
-      offMarketBody:    "We have access to off-market listings not shown here. Tell Sophia what you need and we'll find it.",
+      offMarketBody:    "We have access to off-market listings not shown here. Tell Yuna what you need and we'll find it.",
       offMarketKo:      "원하시는 매물이 없으신가요? 소피아에게 문의해 주십시오.",
       enquiry:      "Private Enquiry",
       srrv:         "SRRV",

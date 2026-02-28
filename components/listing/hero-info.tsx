@@ -12,6 +12,7 @@ type HeroInfoProps = {
   title_ko?: string;
   locationLabel: string;
   locationLabel_ko?: string;
+  address?: string;
   pricePhp: number;
   category: PropertyCategory;
   bedrooms: number;
@@ -25,6 +26,7 @@ export function HeroInfo({
   title_ko,
   locationLabel,
   locationLabel_ko,
+  address,
   pricePhp,
   category,
   bedrooms,
@@ -40,10 +42,10 @@ export function HeroInfo({
   const displayLocation = locale === "ko" && locationLabel_ko ? locationLabel_ko : locationLabel;
 
   const vitals = [
-    { label: t.listings.beds,  value: bedrooms,        icon: BedDouble },
+    { label: t.listings.beds,  value: bedrooms === 0 ? (locale === "ko" ? "스튜디오" : "Studio") : bedrooms, icon: BedDouble },
     { label: t.listings.baths, value: bathrooms,        icon: Bath },
-    { label: locale === "ko" ? "주차" : "Cars", value: parking, icon: Car },
-    { label: locale === "ko" ? "면적" : "Area", value: `${floorArea} sqm`, icon: Square },
+    { label: locale === "ko" ? "주차" : "Cars", value: parking > 0 ? parking : (locale === "ko" ? "문의" : "On request"), icon: Car },
+    { label: locale === "ko" ? "면적" : "Area", value: floorArea > 0 ? `${floorArea} sqm` : (locale === "ko" ? "문의" : "On request"), icon: Square },
   ];
 
   return (
@@ -61,10 +63,15 @@ export function HeroInfo({
       </h1>
 
       <div className="flex flex-wrap items-center gap-4">
-        <p className="inline-flex items-center gap-2 text-sm text-brand-emerald/75">
-          <MapPin className="h-4 w-4" />
-          {displayLocation}
-        </p>
+        <div className="space-y-0.5">
+          <p className="inline-flex items-center gap-2 text-sm text-brand-emerald/75">
+            <MapPin className="h-4 w-4" />
+            {displayLocation}
+          </p>
+          {address && (
+            <p className="pl-6 text-xs text-brand-emerald/55">{address}</p>
+          )}
+        </div>
         <p className="text-xl font-semibold text-brand-emerald sm:text-2xl">
           {formatPrice(pricePhp, currency)}
         </p>

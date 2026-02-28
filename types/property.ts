@@ -7,16 +7,16 @@ export type PropertyFurnishing = "Fully Furnished" | "Semi-Furnished" | "Unfurni
 export type RichTextBlock = { _type: string; [key: string]: unknown };
 
 export type PropertySpecs = {
-  generator: boolean;
-  waterSource: string;
-  internetType: string;
-  roadAccess: string;
+  generator?: boolean | null;
+  waterSource?: string;
+  internetType?: string;
+  roadAccess?: string;
 };
 
 export type PropertyDistances = {
-  airportMins: number;
-  beachMins: number;
-  hospitalMins: number;
+  airportMins: number | null;
+  beachMins: number | null;
+  hospitalMins: number | null;
 };
 
 export type PropertyInvestment = {
@@ -49,6 +49,7 @@ export type Property = {
   title: string;
   title_ko?: string;
   slug: string;
+  address?: string;
   locationLabel: string;
   locationLabel_ko?: string;
   hook?: string;

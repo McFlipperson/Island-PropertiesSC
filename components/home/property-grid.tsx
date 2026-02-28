@@ -27,18 +27,15 @@ export function PropertyGrid({ properties }: PropertyGridProps) {
   if (active.length === 0) return null;
 
   return (
-    <section id="live-inventory" className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 sm:py-20">
-      <div className="mb-8 flex items-end justify-between gap-4">
-        <div>
-          <p className="text-xs uppercase tracking-[0.24em] text-brand-emerald/70">{t.listings.featuredEyebrow}</p>
-          <h2 className="mt-2 font-heading text-3xl font-semibold text-brand-emerald sm:text-4xl">
-            {t.listings.featuredHeading}
-          </h2>
-        </div>
-        <Link href="/listings"
-          className="shrink-0 rounded-full border border-brand-emerald/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-brand-emerald transition hover:border-brand-gold hover:text-brand-gold">
-          {t.listings.viewAll}
-        </Link>
+    <section id="live-inventory" className="w-full bg-white px-4 py-20 sm:px-6 sm:py-28">
+      <div className="mx-auto max-w-7xl">
+      <div className="mb-12 text-center">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold">
+          Featured Properties
+        </p>
+        <h2 className="font-heading text-3xl font-bold text-brand-emerald sm:text-4xl lg:text-5xl">
+          What&apos;s available right now.
+        </h2>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -105,6 +102,16 @@ export function PropertyGrid({ properties }: PropertyGridProps) {
             </div>
           </article>
         ))}
+      </div>
+
+      <div className="mt-12 text-center">
+        <Link
+          href="/listings"
+          className="inline-flex rounded-full border border-brand-emerald/30 px-8 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-brand-emerald transition hover:border-brand-gold hover:text-brand-gold"
+        >
+          See all properties →
+        </Link>
+      </div>
       </div>
     </section>
   );

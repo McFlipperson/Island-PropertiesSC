@@ -1,66 +1,82 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Link from "next/link";
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useUIStore } from "@/store/use-ui-store";
-import { useTranslations } from "@/lib/i18n/translations";
 
 export function Hero() {
-  const locale = useUIStore((s) => s.locale);
-  const t = useTranslations(locale);
+  const openYuna = useUIStore((s) => s.openYuna);
+  const [textVisible, setTextVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setTextVisible(true), 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <section className="mx-auto w-full max-w-7xl px-4 pb-8 pt-6 sm:px-6 sm:pt-10">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-        className="bg-transparent"
-      >
-        <div className="relative h-[72vh] w-full bg-brand-cream sm:h-[88vh] lg:h-[96vh]">
-          <Image
-            src="https://i.imgur.com/4Wumn1e.jpeg"
-            alt="Bohol Island Properties - Natural Paradise Real Estate"
-            fill
-            priority
-            className="object-contain"
-            sizes="100vw"
-          />
-        </div>
-      </motion.div>
+    <section className="relative h-screen w-full overflow-hidden">
+      {/* Full-bleed image */}
+      <Image
+        src="/assets/life-choco-hills.jpg"
+        alt="Bohol Island — Natural Paradise"
+        fill
+        priority
+        className="object-cover animate-kenburns"
+        sizes="100vw"
+      />
 
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-        className="px-1 pt-8 sm:pt-10"
+      {/* Dark gradient overlay — ALWAYS visible, not tied to text */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/20" />
+
+      {/* Centered text content — fades in after 3s */}
+      <div
+        className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center"
+        style={{
+          opacity: textVisible ? 1 : 0,
+          transition: "opacity 1.5s ease-in",
+        }}
       >
-        <p className="mb-4 text-xs uppercase tracking-[0.28em] text-brand-gold sm:text-sm">
-          {t.hero.eyebrow}
+        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.35em] text-brand-gold">
+          Bohol, Philippines
         </p>
-        <h1 className="max-w-3xl text-4xl font-semibold leading-tight text-brand-emerald sm:text-6xl">
-          {t.hero.heading}
+
+        <h1 className="font-heading max-w-3xl text-4xl font-bold leading-tight text-white sm:text-6xl lg:text-7xl">
+          Paradise isn&apos;t<br />
+          just for holidays.
         </h1>
-        <p className="mt-6 max-w-xl text-sm text-brand-emerald/85 sm:text-base">
-          {t.hero.body}
+
+        <p className="mt-5 max-w-md text-base text-white/80 sm:text-lg">
+          Own a piece of Bohol from $65,000. No residency required.
         </p>
-        <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
+
+        <div className="mt-8">
           <Link
             href="/listings"
-            className="inline-flex rounded-full border border-brand-gold/70 bg-brand-gold px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-brand-emerald transition hover:bg-[#d3ad64]"
+            className="inline-flex rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.14em] text-brand-emerald shadow-lg transition hover:bg-[#d3ad64] hover:shadow-xl"
           >
-            {t.hero.cta}
-          </Link>
-          <Link
-            href="/#asset-selector"
-            className="inline-flex rounded-full border border-brand-emerald/30 px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-brand-emerald transition hover:border-brand-gold hover:text-brand-gold"
-          >
-            {t.hero.ctaSecondary}
+            Explore Properties
           </Link>
         </div>
-        <p className="mt-6 text-xs text-brand-emerald/60">{t.hero.footnote}</p>
-      </motion.div>
+      </div>
+
+      {/* Yuna nudge — bottom of hero, also fades in with text */}
+      <div
+        className="absolute bottom-8 left-0 right-0 flex justify-center"
+        style={{
+          opacity: textVisible ? 1 : 0,
+          transition: "opacity 1.5s ease-in",
+        }}
+      >
+        <button
+          onClick={openYuna}
+          className="group flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2.5 text-sm text-white/80 backdrop-blur-sm transition hover:border-brand-gold/50 hover:bg-white/15 hover:text-white"
+        >
+          <span className="h-2 w-2 rounded-full bg-brand-gold" />
+          Questions? Yuna knows every answer
+          <span className="transition group-hover:translate-x-0.5">→</span>
+        </button>
+      </div>
     </section>
   );
 }

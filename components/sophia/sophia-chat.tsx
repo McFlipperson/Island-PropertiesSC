@@ -24,7 +24,8 @@ export function YunaChat() {
   const [isLoading, setIsLoading] = useState(false);
   const [isVoiceEnabled, setIsVoiceEnabled] = useState(true);
   const [sessionId] = useState(() => `sophia-${Date.now()}-${Math.random().toString(36).slice(2)}`);
-  const [remainingMessages, setRemainingMessages] = useState(50);
+  const [remainingMessages, setRemainingMessages] = useState(25);
+  const [nudgeInjected, setNudgeInjected] = useState(false);
   const locale    = useUIStore((state) => state.locale);
 
   const [hasGreeted, setHasGreeted] = useState(false);
@@ -145,6 +146,24 @@ export function YunaChat() {
       setInput("");
       setIsLoading(true);
 
+      // Inject nudge message at message 20 (5 remaining)
+      const newRemaining = remainingMessages - 1;
+      setRemainingMessages(newRemaining);
+      if (newRemaining === 5 && !nudgeInjected) {
+        setNudgeInjected(true);
+        const isKo = locale === "ko";
+        const nudgeContent = isKo
+          ? "고객님과 대화를 나눌 수 있어서 정말 즐거웠습니다! 몇 가지 더 질문에 답해드릴 수 있지만, 프라이빗 투어 안내와 정확한 가격 정보를 원하신다면 전담 전문가와 연결해 드리고 싶습니다. 성함과 이메일을 남겨주시면 Nova가 직접 연락드리겠습니다. 물론 아직 궁금한 점이 있으시면 편하게 물어보세요 😊"
+          : "By the way — I've loved our conversation! I can answer a few more questions, but if you'd like to continue with a real property specialist who can arrange private viewings and get you exact pricing, I'd love to connect you. Just share your name and email and Nova will reach out personally. No pressure at all — I'm still here for whatever you need. 😊";
+        const nudgeMsg: Message = {
+          id: `sophia-nudge-${Date.now()}`,
+          role: "sophia",
+          content: nudgeContent,
+          timestamp: new Date(),
+        };
+        setMessages((prev) => [...prev, nudgeMsg]);
+      }
+
       // Add empty Yuna message immediately — will fill as stream arrives
       const yunaId = `sophia-${Date.now()}`;
       setMessages((prev) => [...prev, { id: yunaId, role: "sophia", content: "", timestamp: new Date() }]);
@@ -213,7 +232,7 @@ export function YunaChat() {
         setIsLoading(false);
       }
     },
-    [input, isLoading, messages, propertyContext, sessionId, isVoiceEnabled, playVoice],
+    [input, isLoading, messages, propertyContext, sessionId, isVoiceEnabled, playVoice, remainingMessages, nudgeInjected, locale],
   );
 
   if (!isYunaOpen) return null;
@@ -232,7 +251,7 @@ export function YunaChat() {
           <div className="flex items-center gap-3">
             <div className="relative">
               <img
-                src="/assets/sophia-avatar.png"
+                src="/assets/yuna-avatar.jpg"
                 alt="Yuna"
                 className="h-10 w-10 rounded-full object-cover border-2 border-brand-gold/60"
               />
@@ -245,7 +264,7 @@ export function YunaChat() {
               )}
             </div>
             <div>
-              <p className="text-sm font-semibold text-brand-cream">Sophia</p>
+              <p className="text-sm font-semibold text-brand-cream">Yuna</p>
               <p className="text-[10px] uppercase tracking-[0.16em] text-brand-cream/60">
                 Property Consultant
               </p>

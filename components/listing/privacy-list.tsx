@@ -9,9 +9,9 @@ export function PrivacyList({ distances }: { distances: PropertyDistances }) {
   const t = useTranslations(locale);
 
   const entries = [
-    { emoji: "✈️", label: t.listing.airport, value: distances.airportMins },
-    { emoji: "🏝️", label: t.listing.beach,   value: distances.beachMins },
-    { emoji: "🏥", label: t.listing.hospital, value: distances.hospitalMins },
+    { emoji: "✈️", label: t.listing.airport,  value: distances.airportMins,  zeroLabel: "Direct access" },
+    { emoji: "🏝️", label: t.listing.beach,    value: distances.beachMins,    zeroLabel: "Direct access" },
+    { emoji: "🏥", label: t.listing.hospital,  value: distances.hospitalMins, zeroLabel: "Direct access" },
   ];
 
   return (
@@ -20,7 +20,7 @@ export function PrivacyList({ distances }: { distances: PropertyDistances }) {
       <ul className="space-y-2">
         {entries.map((e) => (
           <li key={e.label} className="glass-panel rounded-xl border-brand-emerald/15 px-4 py-3 text-sm text-brand-emerald">
-            {e.emoji} {e.label}: {e.value} {t.listing.mins}
+            {e.emoji} {e.label}: {e.value === null ? "Confirm with agent" : e.value === 0 ? e.zeroLabel : `${e.value} ${t.listing.mins}`}
           </li>
         ))}
       </ul>

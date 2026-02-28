@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { Bolt, Droplets, Route, Wifi } from "lucide-react";
 import { useUIStore } from "@/store/use-ui-store";
 import { useTranslations } from "@/lib/i18n/translations";
@@ -13,11 +14,21 @@ export function SpecsGrid({ specs, specs_ko }: Props) {
   const s = (locale === "ko" && specs_ko) ? specs_ko : specs;
 
   const items = [
-    { label: t.listing.power,      value: s.generator ? t.listing.generatorOn : t.listing.generatorOff, icon: Bolt },
-    { label: t.listing.water,      value: s.waterSource,  icon: Droplets },
-    { label: t.listing.internet,   value: s.internetType, icon: Wifi },
-    { label: t.listing.roadAccess, value: s.roadAccess,   icon: Route },
-  ];
+    s.generator != null
+      ? { label: t.listing.power, value: s.generator ? t.listing.generatorOn : t.listing.generatorOff, icon: Bolt }
+      : null,
+    s.waterSource
+      ? { label: t.listing.water,    value: s.waterSource,  icon: Droplets }
+      : null,
+    s.internetType
+      ? { label: t.listing.internet, value: s.internetType, icon: Wifi }
+      : null,
+    s.roadAccess
+      ? { label: t.listing.roadAccess, value: s.roadAccess, icon: Route }
+      : null,
+  ].filter(Boolean) as { label: string; value: string; icon: React.ElementType }[];
+
+  if (items.length === 0) return null;
 
   return (
     <section className="space-y-4">
