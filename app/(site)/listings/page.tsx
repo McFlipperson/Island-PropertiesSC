@@ -5,7 +5,7 @@ import { ListingsPageFooterCta } from "@/components/listings/listings-footer-cta
 import { unstable_noStore as noStore } from "next/cache";
 
 export const metadata = {
-  title: "Properties | Island Properties SC — Bohol Luxury Real Estate",
+  title: "Properties | Island Properties — Bohol Luxury Real Estate",
   description: "Browse exclusive luxury properties in Bohol, Philippines. Beachfront villas, condos, timeshare, and land. Korean buyer support — SRRV guidance, KRW pricing, attorney-backed.",
 };
 

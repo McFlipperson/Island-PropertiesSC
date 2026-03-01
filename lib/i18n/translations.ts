@@ -60,7 +60,7 @@ export const translations = {
       privacy:  "By submitting, you agree to receive property information. Unsubscribe anytime. Your data stays private.",
     },
     listings: {
-      subheading:   "Island Properties SC · Bohol",
+      subheading:   "Island Properties · Bohol",
       heading:      "Private Listings",
       description:  "Curated beachfront villas, condominiums, and investment properties in Bohol, Philippines. Attorney-reviewed. Korean buyer support — SRRV guidance and KakaoTalk consultation.",
       koreanLine:   "한국어 상담 가능 · KakaoTalk · SRRV 전문",
@@ -181,7 +181,7 @@ export const translations = {
       privacy:  "문의를 제출하시면 부동산 정보 수신에 동의하신 것으로 간주됩니다. 언제든지 수신 거부가 가능하며, 개인정보는 안전하게 보호됩니다.",
     },
     listings: {
-      subheading:   "Island Properties SC · 보홀",
+      subheading:   "Island Properties · 보홀",
       heading:      "프라이빗 매물",
       description:  "필리핀 보홀의 럭셔리 빌라, 콘도미니엄, 투자용 부동산을 엄선하여 소개합니다. 모든 매물은 변호사 검토를 거쳤으며, 한국 고객님을 위한 SRRV 안내 및 카카오톡 상담이 가능합니다.",
       koreanLine:   "한국어 상담 가능 · KakaoTalk · SRRV 전문",

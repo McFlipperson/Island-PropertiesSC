@@ -1,7 +1,7 @@
 import type { Property, HomepageProperty } from "@/types/property";
 
 /**
- * Property data — Island Properties SC
+ * Property data — Island Properties
  * Western expat + SRRV focus. Replace with Sanity/API data in production.
  * KRW rate: approx 1 PHP = ₩23.4 (update periodically)
  */
@@ -376,7 +376,7 @@ export const mockProperties: Property[] = [
     ],
     features_ko: [
       "비스타 랜드 개발 (PSE 상장)", "리조트 테마 커뮤니티", "1.7헥타르 부지", "팡라오 35분", "페리 항구 인근 — 바랑가이 불",
-      "시내 비즈니스 지구", "CCT 외국인 소유권", "₱3.5M SRRV 적격", "페리 항구 인근", "리조트 어메니티 덱"
+      "시내 비즈니스 지구", "CCT 외국인 소유권", "₱4.98M SRRV 적격", "페리 항구 인근", "리조트 어메니티 덱"
     ],
     specs: { roadAccess: "Barangay Bool, Tagbilaran City Main Road" },
     specs_ko: { },

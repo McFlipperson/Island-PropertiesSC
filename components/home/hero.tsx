@@ -19,7 +19,7 @@ export function Hero() {
       {/* Full-bleed image */}
       <Image
         src="/assets/life-choco-hills.jpg"
-        alt="Bohol Island — Natural Paradise"
+        alt="Panglao Island Bohol Philippines — Beachfront Property for Foreign Buyers"
         fill
         priority
         className="object-cover animate-kenburns"

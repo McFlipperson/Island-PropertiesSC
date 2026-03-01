@@ -10,12 +10,39 @@ import { YunaListingWrapper } from "@/components/sophia/sophia-listing-wrapper";
 import { getPropertyBySlug } from "@/lib/sanity/properties";
 import { unstable_noStore as noStore } from "next/cache";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 type ListingPageProps = {
   params: {
     slug: string;
   };
 };
+
+export async function generateMetadata({ params }: ListingPageProps): Promise<Metadata> {
+  const property = await getPropertyBySlug(params.slug);
+  if (!property) return {};
+
+  const priceUsd = Math.round(property.pricePhp / 56);
+  const title = `${property.title} | ${property.locationLabel} | From ₱${(property.pricePhp / 1000000).toFixed(1)}M`;
+  const description = `${property.bedrooms}BR ${property.category} in ${property.locationLabel}, Bohol. ₱${property.pricePhp.toLocaleString("en-PH")} (~$${priceUsd.toLocaleString()} USD). ${property.ownership} title. ${property.srrv ? "SRRV-eligible. " : ""}Foreign buyer guidance available.`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://islandpropertiesph.com/listings/${params.slug}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `https://islandpropertiesph.com/listings/${params.slug}`,
+      type: "website",
+      images: property.gallery?.[0]
+        ? [{ url: property.gallery[0], width: 1200, height: 630, alt: property.title }]
+        : [{ url: "/assets/og-image.jpg", width: 1200, height: 630, alt: property.title }],
+    },
+  };
+}
 
 export default async function ListingPage({ params }: ListingPageProps) {
   noStore();
@@ -24,6 +51,43 @@ export default async function ListingPage({ params }: ListingPageProps) {
   if (!property) {
     notFound();
   }
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "RealEstateListing",
+    name: property.title,
+    description: `${property.bedrooms} bedroom ${property.category} in ${property.locationLabel}, Bohol, Philippines.`,
+    url: `https://islandpropertiesph.com/listings/${params.slug}`,
+    image: property.gallery?.[0] ?? "/assets/og-image.jpg",
+    offers: {
+      "@type": "Offer",
+      price: property.pricePhp,
+      priceCurrency: "PHP",
+      availability: "https://schema.org/InStock",
+    },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: property.locationLabel,
+      addressRegion: "Bohol",
+      addressCountry: "PH",
+    },
+    floorSize: {
+      "@type": "QuantitativeValue",
+      value: property.floorArea,
+      unitCode: "MTK",
+    },
+    numberOfRooms: property.bedrooms,
+    amenityFeature: property.features.slice(0, 5).map((f: string) => ({
+      "@type": "LocationFeatureSpecification",
+      name: f,
+      value: true,
+    })),
+    seller: {
+      "@type": "RealEstateAgent",
+      name: "Island Properties",
+      url: "https://islandpropertiesph.com",
+    },
+  };
 
   const propertyContext = `
 Property: ${property.title}
@@ -45,6 +109,10 @@ Investment: Daily Rate $${property.investment.dailyRateUsd} USD, Yield ${propert
 
   return (
     <main className="pb-28">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <section className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-10 sm:px-6 sm:py-12">
         <HeroInfo
           title={property.title}
