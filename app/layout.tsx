@@ -3,8 +3,8 @@ import "./(site)/globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Bohol Property for Sale | Freehold CCT Condos for Foreign Buyers | Island Properties",
-    template: "%s | Island Properties — Bohol Real Estate",
+    default: "Bohol Property for Sale | Freehold CCT Condos for Foreign Buyers | Sikat Realty",
+    template: "%s | Sikat Realty — Bohol Real Estate",
   },
   description:
     "Buy freehold property in Bohol, Philippines. SRRV-eligible CCT condos from ₱2.9M. Legal foreign ownership available. Panglao, Dauis, Tagbilaran. English & Korean support.",
@@ -18,13 +18,13 @@ export const metadata: Metadata = {
     "freehold condo Philippines",
     "Bohol expat property",
   ],
-  authors: [{ name: "Island Properties" }],
+  authors: [{ name: "Sikat Realty" }],
   metadataBase: new URL("https://islandpropertiesph.com"),
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://islandpropertiesph.com",
-    siteName: "Island Properties",
+    siteName: "Sikat Realty",
     title: "Bohol Property for Sale | Freehold CCT Condos for Foreign Buyers",
     description:
       "Buy freehold property in Bohol, Philippines. SRRV-eligible CCT condos from ₱2.9M. Legal foreign ownership available. Panglao, Dauis, Tagbilaran.",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
         url: "/assets/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Island Properties — Bohol Real Estate for Foreign Buyers",
+        alt: "Sikat Realty — Bohol Real Estate for Foreign Buyers",
       },
     ],
   },
