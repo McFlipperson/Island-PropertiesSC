@@ -129,8 +129,8 @@ export function LifeSection() {
         </motion.div>
       </div>
 
-      {/* Lightbox Modal */}
-      <AnimatePresence>
+      {/* Lightbox Modal — DISABLED TEMPORARILY */}
+      {/* <AnimatePresence>
         {selected && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -164,6 +164,7 @@ export function LifeSection() {
           </motion.div>
         )}
       </AnimatePresence>
+      */ }
     </section>
   );
 }

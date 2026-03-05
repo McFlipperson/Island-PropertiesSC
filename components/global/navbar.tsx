@@ -41,7 +41,7 @@ export function Navbar() {
         <Link href="/" className="inline-flex items-center" onClick={closeMenu}>
           <Image
             src="/assets/logo-transparent.png"
-            alt="Island Properties logo"
+            alt="Sikat Realty logo"
             width={420}
             height={120}
             className="h-10 w-auto sm:h-12"
