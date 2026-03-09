@@ -35,9 +35,10 @@ export const mockProperties: Property[] = [
     hoaFees: 0,
     yearBuilt: 2024,
     furnishing: "Unfurnished",
-    mainImage: "/properties/palm-oasis/pool-building.jpg",
+    mainImage: "/properties/palm-oasis/palm-oasis-main.jpg",
     videoFile: "/properties/palm-oasis/palm-oasis.mp4",
     gallery: [
+      "/properties/palm-oasis/palm-oasis-main.jpg",
       "/properties/palm-oasis/pool-building.jpg",
       "/properties/palm-oasis/exterior-render.jpg",
       "/properties/palm-oasis/aerial-site-plan.jpg",
@@ -232,8 +233,9 @@ export const mockProperties: Property[] = [
     hoaFees: 0,
     yearBuilt: 2024,
     furnishing: "Fully Furnished",
-    mainImage: "/properties/vista-suites/pool-hero.jpg",
+    mainImage: "/properties/vista-suites/vista-suites-main.jpg",
     gallery: [
+      "/properties/vista-suites/vista-suites-main.jpg",
       "/properties/vista-suites/pool-hero.jpg",
       "/properties/vista-suites/exterior.jpg",
       "/properties/vista-suites/entrance.jpg",
