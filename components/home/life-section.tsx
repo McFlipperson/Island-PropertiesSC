@@ -4,11 +4,13 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
+import { useUIStore } from "@/store/use-ui-store";
 
 const tiles = [
   {
     label: "Chocolate Hills",
     caption: "Chocolate Hills",
+    captionKo: "초콜릿 힐스",
     size: "col-span-2",
     src: "/assets/life-choco-hills.jpg",
     position: "object-center",
@@ -16,6 +18,7 @@ const tiles = [
   {
     label: "Alona Beach",
     caption: "Alona Beach",
+    captionKo: "알로나 비치",
     size: "",
     src: "/assets/life-beach.jpg",
     position: "object-center",
@@ -23,6 +26,7 @@ const tiles = [
   {
     label: "Alona Beach Nightlife",
     caption: "Alona Beach",
+    captionKo: "알로나 비치",
     size: "",
     src: "/assets/life-nightlife.jpg",
     position: "object-center",
@@ -30,6 +34,7 @@ const tiles = [
   {
     label: "Tagbilaran City",
     caption: "Tagbilaran City",
+    captionKo: "타그빌라란 시티",
     size: "",
     src: "/assets/life-city.jpg",
     position: "object-center",
@@ -37,6 +42,7 @@ const tiles = [
   {
     label: "Philippine Tarsier",
     caption: "Only here.",
+    captionKo: "오직 여기에만.",
     size: "",
     src: "/assets/tarsier-bohol.jpg",
     position: "object-cover object-center",
@@ -44,6 +50,7 @@ const tiles = [
   {
     label: "Bohol Roads",
     caption: "No traffic. Ever.",
+    captionKo: "교통 체증 없음. 영원히.",
     size: "",
     src: "/assets/life-road.jpg",
     position: "object-center",
@@ -51,6 +58,7 @@ const tiles = [
   {
     label: "Bohol Sea Diving",
     caption: "Bohol Sea",
+    captionKo: "보홀 바다",
     size: "",
     src: "/assets/life-diving.jpg",
     position: "object-[center_25%]",
@@ -58,6 +66,7 @@ const tiles = [
   {
     label: "Hinagdanan Cave",
     caption: "Hinagdanan Cave, Panglao",
+    captionKo: "힌아그다난 동굴, 팡라오",
     size: "col-span-2",
     src: "/assets/life-cave.jpg",
     position: "object-center",
@@ -68,6 +77,7 @@ export function LifeSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const [selected, setSelected] = useState<{ src: string; label: string } | null>(null);
+  const locale = useUIStore((s) => s.locale);
 
   return (
     <section
@@ -82,14 +92,14 @@ export function LifeSection() {
           className="mb-10 text-center"
         >
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold">
-            The Life
+            {locale === "ko" ? "보홀의 삶" : "The Life"}
           </p>
           <h2 className="font-heading text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-            Everything you came to Asia for.<br className="hidden sm:block" />
-            <span className="text-brand-gold"> None of what you didn&apos;t.</span>
+            {locale === "ko" ? "아시아에서 원하던 모든 것." : <>Everything you came to Asia for.<br className="hidden sm:block" /></>}
+            <span className="text-brand-gold"> {locale === "ko" ? "원하지 않던 것은 없습니다." : "None of what you didn't."}</span>
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/70">
-            A modern city with hospitals, malls, and infrastructure — wrapped in the most beautiful island you&apos;ve never heard of.
+            {locale === "ko" ? "병원, 쇼핑몰, 인프라를 갖춘 현대적인 도시 — 아직 알려지지 않은 가장 아름다운 섬에 자리 잡고 있습니다." : "A modern city with hospitals, malls, and infrastructure — wrapped in the most beautiful island you've never heard of."}
           </p>
         </motion.div>
 
@@ -122,7 +132,7 @@ export function LifeSection() {
               <div className="absolute inset-x-0 bottom-0 h-[30%] bg-gradient-to-t from-black/60 to-transparent" />
               {/* Magazine caption */}
               <p className="absolute bottom-2 left-3 text-xs leading-none tracking-wide text-white drop-shadow-sm">
-                {tile.caption}
+                {locale === "ko" ? tile.captionKo : tile.caption}
               </p>
             </motion.div>
           ))}

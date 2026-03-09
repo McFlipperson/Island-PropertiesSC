@@ -1,6 +1,6 @@
-export type PropertyCategory = "Residential" | "Commercial" | "Condo";
+export type PropertyCategory = "Residential" | "Commercial" | "Condo" | "Condotel";
 export type PropertyTier = "Trophy" | "Yield" | "Timeshare" | "Land";
-export type PropertyStatus = "Active" | "Reserved" | "Sold" | "Coming Soon";
+export type PropertyStatus = "Active" | "Reserved" | "Sold" | "Coming Soon" | "Archived";
 export type PropertyTitleStatus = "Clean TCT" | "CCT" | "Tax Declaration" | "Mother Title";
 export type PropertyOwnership = "Freehold" | "Leasehold";
 export type PropertyFurnishing = "Fully Furnished" | "Semi-Furnished" | "Unfurnished";
@@ -43,6 +43,7 @@ export type HomepageProperty = {
   floorArea: number;
   mainImage: string;
   yieldPercent?: number;
+  category?: string;
 };
 
 export type Property = {

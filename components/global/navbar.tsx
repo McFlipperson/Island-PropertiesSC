@@ -11,11 +11,13 @@ import { useUIStore } from "@/store/use-ui-store";
 const navItemsEn = [
   { label: "Home",        href: "/" },
   { label: "Properties",  href: "/listings" },
+  { label: "Guide",       href: "/guide" },
   { label: "Getting Here", href: "/getting-here" },
 ];
 const navItemsKo = [
   { label: "홈",       href: "/" },
   { label: "매물",     href: "/listings" },
+  { label: "안내서",   href: "/guide" },
   { label: "오시는 길", href: "/getting-here" },
 ];
 

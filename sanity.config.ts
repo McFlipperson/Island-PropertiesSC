@@ -16,7 +16,7 @@ if (!dataset) {
 
 export default defineConfig({
   name: "default",
-  title: "Island Properties Studio",
+  title: "Sikat Realty Studio",
   projectId,
   dataset,
   basePath: "/studio",

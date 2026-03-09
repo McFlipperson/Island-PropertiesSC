@@ -56,12 +56,12 @@ export function MediaDeck({ title, images, videoFile }: MediaDeckProps) {
         className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto"
       >
         {images.map((image, index) => (
-          <div key={`${image}-${index}`} className="relative h-[46vh] min-w-full snap-center sm:h-[58vh]">
+          <div key={`${image}-${index}`} className="relative h-[46vh] min-w-full snap-center sm:h-[58vh] bg-brand-cream">
             <Image
               src={image}
               alt={`${title} view ${index + 1}`}
               fill
-              className="object-cover"
+              className="object-contain"
               sizes="100vw"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/50" />
