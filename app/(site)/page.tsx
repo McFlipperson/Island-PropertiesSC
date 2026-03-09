@@ -25,11 +25,11 @@ export default async function Home() {
   return (
     <main>
       <Hero />
+      <PropertyGrid properties={properties} />
       <NumbersSection />
-      <LifeSection />
       <OwnershipSection />
       <SrrvSection />
-      <PropertyGrid properties={properties} />
+      <LifeSection />
       <VoicesSection />
     </main>
   );

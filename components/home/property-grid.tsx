@@ -31,10 +31,10 @@ export function PropertyGrid({ properties }: PropertyGridProps) {
       <div className="mx-auto max-w-7xl">
       <div className="mb-12 text-center">
         <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold">
-          Featured Properties
+          {locale === "ko" ? "추천 매물" : "Featured Properties"}
         </p>
         <h2 className="font-heading text-3xl font-bold text-brand-emerald sm:text-4xl lg:text-5xl">
-          What&apos;s available right now.
+          {locale === "ko" ? "지금 구매 가능한 매물." : "What\u0027s available right now."}
         </h2>
       </div>
 
@@ -90,7 +90,7 @@ export function PropertyGrid({ properties }: PropertyGridProps) {
               </div>
 
               <div className="grid grid-cols-2 gap-1.5 text-xs text-brand-emerald/70">
-                <span className="flex items-center gap-1.5"><BedDouble className="h-3.5 w-3.5 text-brand-gold" />{property.bedrooms} {t.listings.beds}</span>
+                <span className="flex items-center gap-1.5"><BedDouble className="h-3.5 w-3.5 text-brand-gold" />{property.bedrooms === 0 ? (property.category === "Condotel" ? (locale === "ko" ? "스위트" : "Suite") : (locale === "ko" ? "스튜디오" : "Studio")) : `${property.bedrooms} ${t.listings.beds}`}</span>
                 <span className="flex items-center gap-1.5"><Bath className="h-3.5 w-3.5 text-brand-gold" />{property.bathrooms} {t.listings.baths}</span>
                 <span className="flex items-center gap-1.5 col-span-2"><Square className="h-3.5 w-3.5 text-brand-gold" />{property.floorArea} sqm</span>
               </div>
@@ -109,7 +109,7 @@ export function PropertyGrid({ properties }: PropertyGridProps) {
           href="/listings"
           className="inline-flex rounded-full border border-brand-emerald/30 px-8 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-brand-emerald transition hover:border-brand-gold hover:text-brand-gold"
         >
-          See all properties →
+          {locale === "ko" ? "모든 매물 보기 →" : "See all properties →"}
         </Link>
       </div>
       </div>
