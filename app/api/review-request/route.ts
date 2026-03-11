@@ -19,10 +19,10 @@ const GOOGLE_REVIEW_URL = "https://g.page/r/PLACEHOLDER/review"; // update once 
 function buildReviewEmail(name: string, language: string, context?: string) {
   if (language === "ko") {
     return {
-      subject: `${name}님, 소중한 의견을 남겨주세요 — Sikat Realty`,
+      subject: `${name}님, 소중한 의견을 남겨주세요 — Sikat Properties`,
       text: `안녕하세요 ${name}님,
 
-저희 Sikat Realty에 관심 가져주셔서 진심으로 감사합니다.
+저희 Sikat Properties에 관심 가져주셔서 진심으로 감사합니다.
 
 귀하의 경험을 Google 리뷰로 공유해 주시면 보홀에서 부동산을 찾는 다른 분들께 큰 도움이 됩니다.
 
@@ -30,20 +30,20 @@ function buildReviewEmail(name: string, language: string, context?: string) {
 ${GOOGLE_REVIEW_URL}
 
 감사합니다.
-Sikat Realty`,
+Sikat Properties`,
       html: `<p>안녕하세요 <strong>${name}</strong>님,</p>
-<p>저희 Sikat Realty에 관심 가져주셔서 진심으로 감사합니다.</p>
+<p>저희 Sikat Properties에 관심 가져주셔서 진심으로 감사합니다.</p>
 <p>귀하의 경험을 Google 리뷰로 공유해 주시면 보홀에서 부동산을 찾는 다른 분들께 큰 도움이 됩니다.</p>
 <p><a href="${GOOGLE_REVIEW_URL}" style="background:#1B4332;color:white;padding:12px 24px;border-radius:6px;text-decoration:none;font-weight:bold;display:inline-block;">리뷰 작성하기 →</a></p>
-<p>감사합니다.<br/>Sikat Realty</p>`,
+<p>감사합니다.<br/>Sikat Properties</p>`,
     };
   }
 
   return {
-    subject: `${name}, a quick favour — Sikat Realty`,
+    subject: `${name}, a quick favour — Sikat Properties`,
     text: `Hi ${name},
 
-Thank you for connecting with Sikat Realty${context ? ` regarding ${context}` : ""}.
+Thank you for connecting with Sikat Properties${context ? ` regarding ${context}` : ""}.
 
 If you have two minutes, a Google review would mean a lot — it helps other buyers find us when they're researching Bohol property.
 
@@ -53,13 +53,13 @@ ${GOOGLE_REVIEW_URL}
 No obligation at all — only if you felt the experience was worth sharing.
 
 Thanks,
-Sikat Realty`,
+Sikat Properties`,
     html: `<p>Hi <strong>${name}</strong>,</p>
-<p>Thank you for connecting with Sikat Realty${context ? ` regarding ${context}` : ""}.</p>
+<p>Thank you for connecting with Sikat Properties${context ? ` regarding ${context}` : ""}.</p>
 <p>If you have two minutes, a Google review would mean a lot — it helps other buyers find us when they&apos;re researching Bohol property.</p>
 <p><a href="${GOOGLE_REVIEW_URL}" style="background:#1B4332;color:white;padding:12px 24px;border-radius:6px;text-decoration:none;font-weight:bold;display:inline-block;">Leave a Review →</a></p>
 <p>No obligation at all — only if you felt the experience was worth sharing.</p>
-<p>Thanks,<br/>Sikat Realty</p>`,
+<p>Thanks,<br/>Sikat Properties</p>`,
   };
 }
 
@@ -101,7 +101,7 @@ export async function POST(request: Request) {
 
     try {
       await transporter.sendMail({
-        from: `"Sikat Realty" <${gmailUser}>`,
+        from: `"Sikat Properties" <${gmailUser}>`,
         to: email,
         subject: draft.subject,
         text: draft.text,

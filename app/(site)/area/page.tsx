@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Bohol Areas Guide | Sikat Realty",
+  title: "Bohol Areas Guide | Sikat Properties",
   description:
     "Explore Bohol's top real estate areas — Panglao, Tagbilaran, Dauis, Baclayon, Anda and more. Find the right location for your lifestyle and budget.",
   keywords:

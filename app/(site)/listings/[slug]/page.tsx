@@ -5,6 +5,7 @@ import { ROISnapshot } from "@/components/listing/roi-snapshot";
 import { SpecsGrid } from "@/components/listing/specs-grid";
 import { VideoModal } from "@/components/listing/video-modal";
 import { ListingDetailBody } from "@/components/listing/listing-detail-body";
+import { ListingTeamCredentials } from "@/components/listing/listing-team-credentials";
 import { RequestViewingButton } from "@/components/listing/request-viewing-button";
 import { YunaListingWrapper } from "@/components/sophia/sophia-listing-wrapper";
 import { getPropertyBySlug } from "@/lib/sanity/properties";
@@ -140,6 +141,11 @@ Investment: Daily Rate $${property.investment.dailyRateUsd} USD, Yield ${propert
           <PrivacyList distances={property.distances} />
           <ROISnapshot investment={property.investment} />
         </div>
+      </section>
+
+      {/* Team section - full width, appears after everything */}
+      <section className="mx-auto w-full max-w-7xl px-4 pb-10 sm:px-6">
+        <ListingTeamCredentials />
       </section>
 
       <VideoModal />

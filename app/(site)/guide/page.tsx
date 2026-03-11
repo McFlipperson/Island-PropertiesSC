@@ -18,7 +18,7 @@ const sections = [
         a: `Yes — with the right structure. Foreigners cannot own land outright, but there are three proven legal paths:
 
 **1. CCT Condo Title (most popular)**
-Condominiums are explicitly exempt from the land ownership restriction. As long as foreign ownership in the building doesn't exceed 40% of total units, you receive a Condominium Certificate of Title (CCT) — your name, on a Filipino title deed, no co-owner required. This is the cleanest, simplest path. All listings on Sikat Realty are CCT-titled.
+Condominiums are explicitly exempt from the land ownership restriction. As long as foreign ownership in the building doesn't exceed 40% of total units, you receive a Condominium Certificate of Title (CCT) — your name, on a Filipino title deed, no co-owner required. This is the cleanest, simplest path. All listings on Sikat Properties are CCT-titled.
 
 **2. Long-Term Lease (up to 99 years)**
 Under Republic Act 12252 (signed September 2025), foreigners can now lease private land for up to 99 years. You own the building or improvements on the land — 100% yours — and lease the ground beneath it. The leasehold interest is fully sellable: if you build a resort and sell in 20 years, the buyer steps into your shoes with 79 years remaining. Value decreases as years decrease, so sell early.

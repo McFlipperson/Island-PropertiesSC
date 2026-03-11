@@ -13,12 +13,14 @@ const navItemsEn = [
   { label: "Properties",  href: "/listings" },
   { label: "Guide",       href: "/guide" },
   { label: "Getting Here", href: "/getting-here" },
+  { label: "Contact",     href: "/contact" },
 ];
 const navItemsKo = [
   { label: "홈",       href: "/" },
   { label: "매물",     href: "/listings" },
   { label: "안내서",   href: "/guide" },
   { label: "오시는 길", href: "/getting-here" },
+  { label: "연락처",   href: "/contact" },
 ];
 
 const currencies: Currency[] = ["PHP", "USD", "KRW"];
@@ -42,10 +44,10 @@ export function Navbar() {
         {/* Logo */}
         <Link href="/" className="inline-flex items-center" onClick={closeMenu}>
           <Image
-            src="/assets/logo-transparent.png"
-            alt="Sikat Realty logo"
-            width={420}
-            height={120}
+            src="/assets/logo-sikat-properties.png"
+            alt="Sikat Properties logo"
+            width={1280}
+            height={518}
             className="h-10 w-auto sm:h-12"
             priority
           />

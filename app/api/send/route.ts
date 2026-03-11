@@ -28,7 +28,7 @@ function buildEmailText(name: string, email: string, phone: string, message: str
 
   if (isKorean) {
     return [
-      "=== Sikat Realty — 새로운 문의 ===",
+      "=== Sikat Properties — 새로운 문의 ===",
       "",
       `이름: ${name}`,
       `이메일: ${email}`,
@@ -38,12 +38,12 @@ function buildEmailText(name: string, email: string, phone: string, message: str
       message,
       "",
       "---",
-      "Sikat Realty 컨시어지 시스템",
+      "Sikat Properties 컨시어지 시스템",
     ].join("\n");
   }
 
   return [
-    "=== Sikat Realty — New Private Inquiry ===",
+    "=== Sikat Properties — New Private Inquiry ===",
     "",
     `Name: ${name}`,
     `Email: ${email}`,
@@ -53,7 +53,7 @@ function buildEmailText(name: string, email: string, phone: string, message: str
     message,
     "",
     "---",
-    "Sikat Realty Concierge System",
+    "Sikat Properties Concierge System",
   ].join("\n");
 }
 
@@ -98,13 +98,13 @@ export async function POST(request: Request) {
 
   const subject = language === "ko"
     ? `[시캣 렬티] 비공개 문의: ${name}`
-    : `[Sikat Realty] Private Inquiry: ${name}`;
+    : `[Sikat Properties] Private Inquiry: ${name}`;
 
   const emailText = buildEmailText(name, email, phone, message, language);
 
   try {
     await transporter.sendMail({
-      from: `"Sikat Realty" <${gmailUser}>`,
+      from: `"Sikat Properties" <${gmailUser}>`,
       to: toEmail,
       replyTo: email,
       subject,
